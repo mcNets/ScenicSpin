@@ -19,7 +19,19 @@ const localStorageKeys = [
 ];
 const defaultRecommendationId = 'bavarian-countryside-90-minute-4k';
 const maxRecentRoutes = 5;
-const maxRouteMediaBadges = 5;
+const maxRouteOverlayBadges = 4;
+const maxRouteMetadataBadges = 6;
+const normalizedSceneryCategories = [
+  { label: 'Mountains', pattern: /\b(alps?|alpine|dolomites?|rockies|rocky mountains?|mountains?|highlands?|mesa)\b/ },
+  { label: 'Water/Lakes', pattern: /\b(lakes?|rivers?|riverside|waterfront|lakeside|fjord|canal|loch|reservoir)\b/ },
+  { label: 'Coastal', pattern: /\b(coasts?|coastal|islands?|ocean|seaside|shoreline|beach|mediterranean)\b/ },
+  { label: 'Climb', pattern: /\b(climbs?|climbing|ascent|uphill|passes?|passo|summit|switchback)\b/ },
+  { label: 'Forest', pattern: /\b(forests?|woodlands?|woods)\b/ },
+  { label: 'Countryside', pattern: /\b(countryside|rural|farmland|pastoral|valleys?|vineyards?|villages?)\b/ },
+  { label: 'City', pattern: /\b(city|urban|historic town)\b/ },
+  { label: 'Flat/Easy', pattern: /\b(flat|easy|gentle|relaxed|river paths?|riverside paths?)\b/ },
+  { label: 'Gravel', pattern: /\bgravel\b/ }
+];
 const candidateDecisionLabels = {
   promote: 'Promote/Yes',
   reject: 'Reject/No',
@@ -189,6 +201,30 @@ function cleanDurationBadge(route) {
   return '';
 }
 
+function isDurationBadge(value) {
+  const text = normalizeWhitespace(value).toLowerCase();
+  if (!text) return false;
+
+  return /^(?:about|approx\.?|around)?\s*\d+\+?\s*(?:min|mins|minutes?|hr|hrs|hours?)$/.test(text) ||
+    /^\d+\s*(?:hr|hrs|hours?)\s+\d+\s*(?:min|mins|minutes?)$/.test(text) ||
+    /^\d+\s*[- ]\s*(?:min|mins|minutes?|hr|hrs|hours?)$/.test(text);
+}
+
+function cleanMetricsOverlayBadge(route) {
+  const tags = Array.isArray(route.sceneryTags) ? route.sceneryTags.join(' ') : '';
+  const text = [
+    route.title,
+    route.terrain,
+    route.cameraStyle,
+    route.videoQuality,
+    tags
+  ].map((value) => cleanPublicText(value).toLowerCase()).join(' ');
+
+  return /\b(telemetry|garmin|gradient|speed graphics?|training overlays?|metrics overlay|data overlay|overlays?)\b/.test(text)
+    ? 'Metrics overlay'
+    : '';
+}
+
 function routeBadgeText(route) {
   const tags = Array.isArray(route.sceneryTags) ? route.sceneryTags.join(' ') : '';
   return [
@@ -201,33 +237,43 @@ function routeBadgeText(route) {
   ].map((value) => cleanPublicText(value).toLowerCase()).join(' ');
 }
 
-function cleanSceneryTerrainBadges(route) {
+function getNormalizedSceneryCategories(route) {
   const text = routeBadgeText(route);
-  const badges = [];
-  const addBadge = (label, pattern) => {
-    if (pattern.test(text)) badges.push(label);
-  };
-
-  addBadge('Gravel', /\bgravel\b/);
-  addBadge('Climb', /\b(climbs?|climbing|ascent|uphill|passes?|passo|summit|switchback)\b/);
-  addBadge('Mountains', /\b(alps?|alpine|dolomites?|rockies|rocky mountains?|mountains?|highlands?|mesa)\b/);
-  addBadge('Coastal', /\b(coasts?|coastal|islands?|ocean|seaside|shoreline|beach|mediterranean)\b/);
-  addBadge('Water/Lakes', /\b(lakes?|rivers?|riverside|waterfront|lakeside|fjord|canal|loch|reservoir)\b/);
-  addBadge('Forest', /\b(forests?|woodlands?|woods)\b/);
-  addBadge('Countryside', /\b(countryside|rural|farmland|pastoral|valleys?|vineyards?|villages?)\b/);
-  addBadge('City', /\b(city|urban)\b/);
-  addBadge('Flat/Easy', /\b(flat|easy|gentle|relaxed|river paths?|riverside paths?)\b/);
-
-  return uniqueList(badges);
+  return normalizedSceneryCategories
+    .filter(({ pattern }) => pattern.test(text))
+    .map(({ label }) => label);
 }
 
-function getRouteMediaBadges(route) {
+function cleanLocationBadge(location) {
+  const parts = cleanPublicText(location)
+    .split(',')
+    .map((part) => part.trim())
+    .filter((part) => part && !isDurationBadge(part));
+  return parts[parts.length - 1] || '';
+}
+
+function getRouteOverlayBadges(route) {
   return uniqueList([
     ...cleanQualityBadges(route),
-    cleanDurationBadge(route),
-    ...cleanSceneryTerrainBadges(route),
+    cleanMetricsOverlayBadge(route),
+    cleanDurationBadge(route)
+  ]).slice(0, maxRouteOverlayBadges);
+}
+
+function prioritizeSceneryBadges(categories) {
+  const priority = ['Gravel', 'Climb', 'Flat/Easy', 'Mountains', 'Water/Lakes', 'Coastal', 'Forest', 'Countryside', 'City'];
+  return [...categories].sort((left, right) => priority.indexOf(left) - priority.indexOf(right));
+}
+
+function getRouteMetadataBadges(route) {
+  return uniqueList([
+    cleanLocationBadge(route.location),
+    route.intensity,
+    ...prioritizeSceneryBadges(route.normalizedSceneryCategories || getNormalizedSceneryCategories(route)),
     cleanAudioBadge(route)
-  ]).slice(0, maxRouteMediaBadges);
+  ])
+    .filter((badge) => !isDurationBadge(badge))
+    .slice(0, maxRouteMetadataBadges);
 }
 
 function getThumbnailAltText(route) {
@@ -605,7 +651,10 @@ function normalizeRoute(route) {
   const location = cleanPublicText(route.location, 'Location to be announced');
   const terrain = cleanPublicText(route.terrain, 'Scenic cycling route');
   const creator = cleanPublicText(route.creator, 'Public video source');
-  const mediaBadges = getRouteMediaBadges({ ...route, title, sceneryTags });
+  const routeForBadges = { ...route, title, location, sceneryTags };
+  const normalizedScenery = getNormalizedSceneryCategories(routeForBadges);
+  const overlayBadges = getRouteOverlayBadges(routeForBadges);
+  const metadataBadges = getRouteMetadataBadges({ ...routeForBadges, intensity: difficulty, normalizedSceneryCategories: normalizedScenery });
 
   return {
     ...route,
@@ -621,9 +670,12 @@ function normalizeRoute(route) {
     videoId,
     thumbnailUrl,
     thumbnailFallbackUrl,
-    mediaBadges,
-    videoQualityBadge: mediaBadges.find((badge) => /^(?:4K|1080p|HD)$/.test(badge)) || '',
-    audioBadge: mediaBadges.find((badge) => /audio|music|narration/i.test(badge)) || '',
+    normalizedSceneryCategories: normalizedScenery,
+    overlayBadges,
+    metadataBadges,
+    mediaBadges: overlayBadges,
+    videoQualityBadge: overlayBadges.find((badge) => /^(?:4K|1080p|HD)$/.test(badge)) || '',
+    audioBadge: metadataBadges.find((badge) => /audio|music|narration/i.test(badge)) || '',
     description: `${terrain} • ${creator}`
   };
 }
@@ -755,18 +807,21 @@ function uniqueValues(key) {
 }
 
 function uniqueSceneryTags() {
-  return [...new Set(routes.flatMap((route) => route.sceneryTags).filter(Boolean))].sort();
+  const available = new Set(routes.flatMap((route) => route.normalizedSceneryCategories || []).filter(Boolean));
+  return normalizedSceneryCategories
+    .map(({ label }) => label)
+    .filter((label) => available.has(label));
 }
 
 function resetFilter(select, label) {
   select.innerHTML = `<option value="all">${label}</option>`;
 }
 
-function populateFilter(select, values) {
+function populateFilter(select, values, formatLabel = titleCase) {
   values.forEach((value) => {
     const option = document.createElement('option');
     option.value = value;
-    option.textContent = titleCase(value);
+    option.textContent = formatLabel(value);
     select.append(option);
   });
 }
@@ -774,7 +829,7 @@ function populateFilter(select, values) {
 function populateFilters() {
   resetFilter(elements.sceneryFilter, 'Any scenery');
   resetFilter(elements.intensityFilter, 'Any intensity');
-  populateFilter(elements.sceneryFilter, uniqueSceneryTags());
+  populateFilter(elements.sceneryFilter, uniqueSceneryTags(), (value) => value);
   populateFilter(elements.intensityFilter, uniqueValues('intensity'));
 }
 
@@ -792,9 +847,11 @@ function routeMatches(route) {
     route.location,
     route.terrain,
     route.creator,
-    route.mediaBadges.join(' '),
+    route.overlayBadges.join(' '),
+    route.metadataBadges.join(' '),
     cleanPublicText(route.cameraStyle),
     route.sceneryTags.join(' '),
+    route.normalizedSceneryCategories.join(' '),
     route.intensity
   ]
     .join(' ')
@@ -803,7 +860,7 @@ function routeMatches(route) {
   return (
     haystack.includes(state.query) &&
     durationMatches(route) &&
-    (state.scenery === 'all' || route.sceneryTags.includes(state.scenery)) &&
+    (state.scenery === 'all' || route.normalizedSceneryCategories.includes(state.scenery)) &&
     (state.intensity === 'all' || route.intensity === state.intensity) &&
     (!state.favoritesOnly || isFavorite(route.id))
   );
@@ -945,11 +1002,10 @@ function renderCatalog() {
 
   visibleRoutes.forEach((route) => {
     const card = document.createElement('article');
-    const tags = route.sceneryTags
-      .slice(0, 2)
-      .map((tag) => `<li>${escapeHtml(titleCase(tag))}</li>`)
+    const overlayBadges = (route.overlayBadges?.length ? route.overlayBadges : ['Video'])
+      .map((badge) => `<li>${escapeHtml(badge)}</li>`)
       .join('');
-    const mediaBadges = (route.mediaBadges?.length ? route.mediaBadges : ['Video'])
+    const metadataBadges = (route.metadataBadges?.length ? route.metadataBadges : [route.intensity])
       .map((badge) => `<li>${escapeHtml(badge)}</li>`)
       .join('');
     card.className = `route-card ${state.selectedRoute?.id === route.id ? 'selected-card' : ''}`;
@@ -964,7 +1020,7 @@ function renderCatalog() {
             ? `<img src="${escapeHtml(route.thumbnailUrl)}" alt="${escapeHtml(getThumbnailAltText(route))}" loading="lazy" data-fallback="${escapeHtml(route.thumbnailFallbackUrl)}">`
             : `<span aria-hidden="true">${escapeHtml(route.scenery)}</span>`
         }
-        <ul class="route-card-badges" aria-label="Route highlight badges">${mediaBadges}</ul>
+        <ul class="route-card-badges" aria-label="Media badges">${overlayBadges}</ul>
         <button class="favorite-card-button ${isFavorite(route.id) ? 'is-favorite' : ''}" type="button" aria-pressed="${isFavorite(route.id) ? 'true' : 'false'}" aria-label="${isFavorite(route.id) ? 'Remove favorite' : 'Save favorite'}: ${escapeHtml(route.title)}">
           ${isFavorite(route.id) ? '★' : '☆'}
         </button>
@@ -972,11 +1028,7 @@ function renderCatalog() {
       <div class="card-body">
         <p class="route-location">${escapeHtml(route.location)}</p>
         <h3>${escapeHtml(route.title)}</h3>
-        <ul class="pill-list" aria-label="Route metadata">
-          <li>${escapeHtml(route.durationLabel)}</li>
-          <li>${escapeHtml(route.intensity)}</li>
-          ${tags}
-        </ul>
+        <ul class="pill-list route-metadata-badges" aria-label="Route decision metadata">${metadataBadges}</ul>
         <span class="card-cta" aria-hidden="true">Preview ride →</span>
       </div>
     `;
@@ -1183,7 +1235,7 @@ function renderSelectedRoute() {
     <div><dt>Terrain</dt><dd>${escapeHtml(route.terrain || 'Not specified')}</dd></div>
     <div><dt>Location</dt><dd>${escapeHtml(route.location)}</dd></div>
     <div><dt>Creator</dt><dd>${escapeHtml(route.creator || 'Unknown')}</dd></div>
-    <div><dt>Video</dt><dd>${escapeHtml((route.mediaBadges?.length ? route.mediaBadges : ['Video']).join(' · '))}</dd></div>
+    <div><dt>Video</dt><dd>${escapeHtml((route.overlayBadges?.length ? route.overlayBadges : ['Video']).join(' · '))}</dd></div>
   `;
   elements.startRideButton.disabled = !route.embeddingAllowed;
   elements.favoriteRouteButton.disabled = false;

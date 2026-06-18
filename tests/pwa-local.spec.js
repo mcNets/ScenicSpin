@@ -66,6 +66,7 @@ test('production route cards show clean media badges without review metadata', a
   const routeWithReviewMetadata = {
     ...catalog.routes[0],
     title: 'Rallarvegen Norway Virtual Cycling Route',
+    location: 'Rallarvegen, Italy, 60 min',
     terrain: 'mountain gravel road and highland cycling route',
     videoQuality: 'HD/4K training video; verify playback quality before launch',
     audio: 'creator training video audio; verify before launch'
@@ -80,8 +81,10 @@ test('production route cards show clean media badges without review metadata', a
   await expect(productionGrid).not.toContainText(/verify playback|before launch|training video; verify|original audio/i);
 
   const card = page.locator('.route-card').filter({ hasText: routeWithReviewMetadata.title }).first();
-  expect(await card.locator('.route-card-badges li').allTextContents()).toEqual(['4K', '60+ min', 'Gravel', 'Mountains', 'Water/Lakes']);
+  expect(await card.locator('.route-card-badges li').allTextContents()).toEqual(['4K', '60+ min']);
   await expect(card.locator('.route-card-badges')).not.toContainText(/Original audio|verify|before launch|training video audio/i);
+  expect(await card.locator('.route-metadata-badges li').allTextContents()).toEqual(expect.arrayContaining(['Italy', 'Moderate', 'Gravel', 'Mountains', 'Water/Lakes']));
+  await expect(card.locator('.route-metadata-badges')).not.toContainText(/4K|60\+ min|Original audio|verify|before launch|training video audio/i);
 
   const thumbnailAlt = await card.locator('img').getAttribute('alt');
   expect(thumbnailAlt).toBe(`Scenic preview for ${routeWithReviewMetadata.title}.`);
@@ -92,19 +95,49 @@ test('production route cards normalize scenery and terrain into useful badges', 
   await loadCatalog(page);
 
   const lakeCard = page.locator('.route-card').filter({ hasText: 'Lake Achensee' }).first();
-  const lakeBadges = await lakeCard.locator('.route-card-badges li').allTextContents();
-  expect(lakeBadges).toEqual(expect.arrayContaining(['4K', '60+ min', 'Mountains', 'Water/Lakes']));
-  expect(lakeBadges.length).toBeLessThanOrEqual(5);
+  const lakeOverlayBadges = await lakeCard.locator('.route-card-badges li').allTextContents();
+  const lakeMetadataBadges = await lakeCard.locator('.route-metadata-badges li').allTextContents();
+  expect(lakeOverlayBadges).toEqual(['4K', '60+ min']);
+  expect(lakeMetadataBadges).toEqual(expect.arrayContaining(['Austria', 'Moderate', 'Mountains', 'Water/Lakes']));
+  expect(lakeMetadataBadges.length).toBeLessThanOrEqual(6);
 
   const gravelCard = page.locator('.route-card').filter({ hasText: "Rallarvegen: Norway's Most Beautiful Ride" }).first();
-  const gravelBadges = await gravelCard.locator('.route-card-badges li').allTextContents();
-  expect(gravelBadges).toEqual(expect.arrayContaining(['4K', '60+ min', 'Gravel', 'Mountains']));
-  expect(gravelBadges.length).toBeLessThanOrEqual(5);
+  const gravelOverlayBadges = await gravelCard.locator('.route-card-badges li').allTextContents();
+  const gravelMetadataBadges = await gravelCard.locator('.route-metadata-badges li').allTextContents();
+  expect(gravelOverlayBadges).toEqual(['4K', '60+ min']);
+  expect(gravelMetadataBadges).toEqual(expect.arrayContaining(['Norway', 'Moderate', 'Gravel', 'Mountains']));
+  expect(gravelMetadataBadges.length).toBeLessThanOrEqual(6);
 
   const climbCard = page.locator('.route-card').filter({ hasText: 'Passo di Valparola Dolomites Uphill Ride' }).first();
-  const climbBadges = await climbCard.locator('.route-card-badges li').allTextContents();
-  expect(climbBadges).toEqual(expect.arrayContaining(['4K', '60+ min', 'Climb', 'Mountains']));
-  expect(climbBadges.length).toBeLessThanOrEqual(5);
+  const climbOverlayBadges = await climbCard.locator('.route-card-badges li').allTextContents();
+  const climbMetadataBadges = await climbCard.locator('.route-metadata-badges li').allTextContents();
+  expect(climbOverlayBadges).toEqual(['4K', 'Metrics overlay', '60+ min']);
+  expect(climbMetadataBadges).toEqual(expect.arrayContaining(['Italy', 'Challenging', 'Climb', 'Mountains']));
+  expect(climbMetadataBadges.length).toBeLessThanOrEqual(6);
+
+  const metricsCard = page.locator('.route-card').filter({ hasText: 'Spain Indoor Cycling Workout with Telemetry' }).first();
+  expect(await metricsCard.locator('.route-card-badges li').allTextContents()).toEqual(['4K', 'Metrics overlay']);
+  await expect(metricsCard.locator('.route-card-badges')).not.toContainText(/Telemetry\/Gradient overlay|Telemetry$/i);
+  await expect(metricsCard.locator('.route-metadata-badges')).not.toContainText('Metrics overlay');
+});
+
+test('scenery filter uses normalized rider-facing categories', async ({ page }) => {
+  await loadCatalog(page);
+
+  const sceneryOptions = await page.locator('#sceneryFilter option').allTextContents();
+  expect(sceneryOptions).toEqual(expect.arrayContaining(['Any scenery', 'Mountains', 'Water/Lakes', 'Climb', 'Gravel']));
+  expect(sceneryOptions).not.toEqual(expect.arrayContaining(['alps', 'river', 'lake']));
+
+  await page.locator('#sceneryFilter').selectOption('Water/Lakes');
+  await expect(page.locator('#sceneryFilter')).toHaveValue('Water/Lakes');
+  await expect(page.locator('.route-card').first()).toBeVisible();
+
+  const visibleMetadata = await page.locator('.route-card .route-metadata-badges').allTextContents();
+  expect(visibleMetadata.length).toBeGreaterThan(0);
+  expect(visibleMetadata.every((text) => text.includes('Water/Lakes'))).toBeTruthy();
+
+  const preferences = await page.evaluate(() => JSON.parse(localStorage.getItem('scenicRideCatalog.filterPreferences')));
+  expect(preferences).toMatchObject({ scenery: 'Water/Lakes' });
 });
 
 test('candidate backlog stays hidden until review mode and exports local decisions', async ({ page, request }) => {
@@ -154,6 +187,19 @@ test('candidate backlog stays hidden until review mode and exports local decisio
 test('favorites persist locally and favorites-only filter works', async ({ page }) => {
   await loadCatalog(page);
 
+  const favoritesControl = page.locator('label.toggle-field', { has: page.locator('#favoritesFilter') });
+  await expect(favoritesControl).toContainText('Favorites only');
+  const [controlBox, checkboxBox] = await Promise.all([
+    favoritesControl.boundingBox(),
+    page.locator('#favoritesFilter').boundingBox()
+  ]);
+  expect(controlBox).not.toBeNull();
+  expect(checkboxBox).not.toBeNull();
+  expect(checkboxBox.x).toBeGreaterThanOrEqual(controlBox.x);
+  expect(checkboxBox.y).toBeGreaterThanOrEqual(controlBox.y);
+  expect(checkboxBox.x + checkboxBox.width).toBeLessThanOrEqual(controlBox.x + controlBox.width);
+  expect(checkboxBox.y + checkboxBox.height).toBeLessThanOrEqual(controlBox.y + controlBox.height);
+
   const firstCard = page.locator('.route-card').first();
   const firstTitle = (await firstCard.locator('h3').textContent()).trim();
   await firstCard.locator('.favorite-card-button').click();
@@ -166,7 +212,7 @@ test('favorites persist locally and favorites-only filter works', async ({ page 
 
   await page.reload();
   await expect(page.locator('.route-card').filter({ hasText: firstTitle }).locator('.favorite-card-button')).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('#favoritesFilter').check();
+  await page.getByLabel('Favorites only').check();
 
   await expect(page.locator('.route-card')).toHaveCount(1);
   await expect(page.locator('.route-card').first()).toContainText(firstTitle);

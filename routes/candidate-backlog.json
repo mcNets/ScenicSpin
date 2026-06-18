@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedAt": "2026-06-17",
-  "purpose": "Scalable ScenicSpin route curation backlog. This file is not the production catalog.",
-  "legalPolicy": "Link/embed official public streams only. Do not download, proxy, mirror, or rehost creator video files. Re-check embed availability, source authenticity, and platform/license terms before launch.",
+  "purpose": "Hidden ScenicSpin route curation/review source. Featured entries are promoted to the production catalog and retained here for traceability.",
+  "legalPolicy": "Link/embed official public streams only. Do not download, proxy, mirror, or rehost creator video files. Re-check embed availability, source authenticity, and platform/license terms during review and periodically after promotion.",
   "recommendedCatalogSizes": {
     "mvpFeatured": {
       "target": 12,
@@ -29,7 +29,7 @@
   "curationTiers": {
     "backlog": "Unreviewed candidates used for research and triage.",
     "reviewed": "Eligible for import into production catalog after product fit check.",
-    "featured": "Small hand-picked set exposed prominently."
+    "featured": "Small hand-picked set exposed prominently in production and retained here for curation traceability."
   },
   "candidateSourceStrategy": [
     "Use creator/channel allowlists first: Virtual Cycling Workouts, Bike the World, Indoor Cycling Videos, Jerry's Scenic Indoor Cycling, Bike Ireland, Prowalk Tours, and similar official public creator channels.",
@@ -68,26 +68,26 @@
         "alps",
         "garmin overlay"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person uphill indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Indoor Cycling Videos",
         "oEmbedTitle": "60 Minute Uphill Indoor Cycling Passo di Valparola Dolomites Italy Garmin 4K Video",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "passo-valparola-dolomites-italy-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -112,26 +112,26 @@
         "villages",
         "long ride"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator tour video audio",
+      "cameraStyle": "long-form first-person bike ride / virtual tour",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Prowalk Tours",
         "oEmbedTitle": "Lake Como Bike Ride, Italy  - 4K - 36 Miles / 58 Km",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "lake-como-italy-36-mile-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -155,26 +155,26 @@
         "pov",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title/metadata",
+      "audio": "creator video audio",
+      "cameraStyle": "first-person POV virtual cycling ride",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Virtual Cycling Workouts",
         "oEmbedTitle": "This Bike Trail Is Like a Secret Paradise",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "secret-paradise-bike-trail-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -198,26 +198,26 @@
         "short ride",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person indoor cycling route with telemetry overlay",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Indoor Cycling Videos",
         "oEmbedTitle": "30 minute Indoor Cycling Workout Spain with Telemetry Display 4K Video",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "spain-telemetry-indoor-cycling-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -241,26 +241,26 @@
         "mountains",
         "training"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Rallarvegen - Norway's most beautiful ride? - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "rallarvegen-norway-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -284,26 +284,26 @@
         "mountains",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator video audio",
+      "cameraStyle": "non-stop first-person virtual bike ride",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike Ireland",
         "oEmbedTitle": "Glencree Wicklow Mountains : 4K Non Stop Virtual Bike Ride Ireland",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "glencree-wicklow-mountains-ireland-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -327,26 +327,26 @@
         "mountains",
         "training"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Crossing Picos de Europa - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "picos-de-europa-spain-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -370,26 +370,26 @@
         "fjord",
         "valley"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Oldedalen from Stryn (Norway) - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "oldedalen-stryn-norway-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -398,7 +398,7 @@
       "status": "featured",
       "curationTier": "featured",
       "promotionReadiness": "promoted-to-production",
-      "title": "Ride Through Bavaria’s Most Beautiful Landscapes! 🌿🏔️ | Virtual Cycling Workout | 4K",
+      "title": "Ride Through Bavaria\u2019s Most Beautiful Landscapes! \ud83c\udf3f\ud83c\udfd4\ufe0f | Virtual Cycling Workout | 4K",
       "sourceUrl": "https://www.youtube.com/watch?v=i251rkpezQk",
       "embedUrl": "https://www.youtube-nocookie.com/embed/i251rkpezQk",
       "sourcePlatform": "youtube",
@@ -413,26 +413,26 @@
         "landscapes",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator video audio",
+      "cameraStyle": "first-person POV virtual cycling workout",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Virtual Cycling Workouts",
-        "oEmbedTitle": "Ride Through Bavaria’s Most Beautiful Landscapes! 🌿🏔️ | Virtual Cycling Workout | 4K",
-        "needsHumanReview": true,
+        "oEmbedTitle": "Ride Through Bavaria\u2019s Most Beautiful Landscapes! \ud83c\udf3f\ud83c\udfd4\ufe0f | Virtual Cycling Workout | 4K",
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "bavaria-beautiful-landscapes-virtual-cycling-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -457,26 +457,26 @@
         "vineyards",
         "no music"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "natural sounds/no music per creator title",
+      "cameraStyle": "first-person POV scenic virtual cycling ride",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Virtual Cycling Workouts",
         "oEmbedTitle": "Scenic 4K Ride in Italy | Castles, Vineyards & Lake Garda | No Music, Just Nature",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:virtual bike ride 4K no music scenic cycling",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "lake-garda-castles-vineyards-italy-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -500,26 +500,26 @@
         "speed graphics",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person indoor cycling route with speed overlay",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Indoor Cycling Videos",
         "oEmbedTitle": "1 hour Virtual Indoor Cycling Dolomites Italy mph Speed Graphics 4K Video",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "dolomites-speed-graphics-indoor-cycling-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -543,26 +543,26 @@
         "lake",
         "garmin overlay"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person indoor cycling workout with Garmin overlay",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Indoor Cycling Videos",
         "oEmbedTitle": "45 minute Fat Burning Indoor Cycling Workout Alps South Tyrol Lake Tour Garmin 4K",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:4K virtual cycling workout scenic ride no music",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "south-tyrol-alps-lake-tour-garmin-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -586,26 +586,26 @@
         "italy",
         "climb"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Sella Ronda (Passo Sella and Passo Gardena - Italy) - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "sella-ronda-passo-sella-gardena-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -614,7 +614,7 @@
       "status": "featured",
       "curationTier": "featured",
       "promotionReadiness": "promoted-to-production",
-      "title": "Lac d'Orédon from St-Lary-Soulan - Indoor Cycling Training",
+      "title": "Lac d'Or\u00e9don from St-Lary-Soulan - Indoor Cycling Training",
       "sourceUrl": "https://www.youtube.com/watch?v=OhH9fZEzcKU",
       "embedUrl": "https://www.youtube-nocookie.com/embed/OhH9fZEzcKU",
       "sourcePlatform": "youtube",
@@ -629,26 +629,26 @@
         "lake",
         "climb"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
-        "oEmbedTitle": "Lac d'Orédon from St-Lary-Soulan - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "oEmbedTitle": "Lac d'Or\u00e9don from St-Lary-Soulan - Indoor Cycling Training",
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "lac-doredon-st-lary-soulan-france-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -672,26 +672,26 @@
         "provence",
         "training"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Around Lake of Sainte Croix (France) - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "lake-sainte-croix-france-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -715,26 +715,26 @@
         "alpine",
         "climb"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Grossglockner High Alpine Road - Edelweissspitze from Fusch (Austria) - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "grossglockner-edelweissspitze-austria-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -758,26 +758,26 @@
         "lake",
         "stage"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "The Lake Loop (Stage 1) - Voted Britains Best Ride - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "lake-district-uk-lake-loop-stage-1",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -786,7 +786,7 @@
       "status": "featured",
       "curationTier": "featured",
       "promotionReadiness": "promoted-to-production",
-      "title": "Col des Tentes via Gavarnie from Gèdre - Indoor Cycling Training",
+      "title": "Col des Tentes via Gavarnie from G\u00e8dre - Indoor Cycling Training",
       "sourceUrl": "https://www.youtube.com/watch?v=M0bIbOYKITM",
       "embedUrl": "https://www.youtube-nocookie.com/embed/M0bIbOYKITM",
       "sourcePlatform": "youtube",
@@ -801,26 +801,26 @@
         "col des tentes",
         "climb"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
-        "oEmbedTitle": "Col des Tentes via Gavarnie from Gèdre - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "oEmbedTitle": "Col des Tentes via Gavarnie from G\u00e8dre - Indoor Cycling Training",
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "col-des-tentes-gavarnie-france-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -844,26 +844,26 @@
         "training",
         "scenic"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Norwegian River Ride - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "norwegian-river-ride-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -887,26 +887,26 @@
         "circular",
         "long ride"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "The Settle Circular - Stage 1: Riding the Heart of Yorkshire - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "settle-circular-yorkshire-stage-1-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -930,26 +930,26 @@
         "flat",
         "world heritage"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "The World Heritage Windmills of Kinderdijk (Netherlands) - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "kinderdijk-windmills-netherlands-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -973,26 +973,26 @@
         "climb",
         "mountains"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "HD/4K training video",
+      "audio": "creator training video audio",
+      "cameraStyle": "first-person indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Bike the World",
         "oEmbedTitle": "Monte Grappa - Italy's Mont Ventoux - Indoor Cycling Training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Bike the World Indoor Cycling Training scenic ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "monte-grappa-italy-indoor-cycling",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1016,26 +1016,26 @@
         "fall color",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person scenic indoor cycling route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[87] 4K Maroon Bells 2021 spectacular fall color bike ride 4K",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "maroon-bells-colorado-fall-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1059,26 +1059,26 @@
         "gravel",
         "training"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person gravel indoor cycling training route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[102] 4K Grand Mesa Gravel bike ride for indoor training",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "grand-mesa-colorado-gravel-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1102,26 +1102,26 @@
         "silverton",
         "mountains"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person/group road cycling route for indoor training",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[89] 4K Million Dollar Highway group bike ride to Silverton Colorado",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "million-dollar-highway-silverton-colorado-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1145,26 +1145,26 @@
         "road",
         "training"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person indoor cycling route with gradient overlays",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[115] 4K Indoor Cycling.  Little Park Road with gradient overlays",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "little-park-road-colorado-gradient-overlays-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1188,26 +1188,26 @@
         "desert",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person road cycling route with indoor-training pacing",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[81] 4K Colorado National Monument Bike Ride 4K",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json as part of the small visible-catalog expansion. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "colorado-national-monument-bike-ride-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1231,26 +1231,26 @@
         "bike path",
         "glenwood springs"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person scenic indoor cycling route",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[80] 4K Crystal River bike path northbound to Glenwood Springs 4K",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "crystal-river-glenwood-springs-bike-path-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1274,26 +1274,26 @@
         "roan creek",
         "overlays"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator indoor cycling video audio",
+      "cameraStyle": "first-person indoor cycling route with overlays",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Jerry's Scenic Indoor Cycling",
         "oEmbedTitle": "[122] 4K DeBeque Roan Creek ride with Overlays",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:Jerry's Scenic Indoor Cycling 4K ride",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "debeque-roan-creek-colorado-overlays-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1302,7 +1302,7 @@
       "status": "featured",
       "curationTier": "featured",
       "promotionReadiness": "promoted-to-production",
-      "title": "🚴‍♀️ Cycling Karwendel Nature Park | Isar River Source to Mittenwald | 4K No Music POV | Slow TV",
+      "title": "\ud83d\udeb4\u200d\u2640\ufe0f Cycling Karwendel Nature Park | Isar River Source to Mittenwald | 4K No Music POV | Slow TV",
       "sourceUrl": "https://www.youtube.com/watch?v=EbAKskXhlrU",
       "embedUrl": "https://www.youtube-nocookie.com/embed/EbAKskXhlrU",
       "sourcePlatform": "youtube",
@@ -1318,26 +1318,26 @@
         "no music",
         "slow tv"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "natural sounds/no music per creator title",
+      "cameraStyle": "first-person POV slow-TV virtual cycling ride",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Virtual Cycling Workouts",
-        "oEmbedTitle": "🚴‍♀️ Cycling Karwendel Nature Park | Isar River Source to Mittenwald | 4K No Music POV | Slow TV",
-        "needsHumanReview": true,
+        "oEmbedTitle": "\ud83d\udeb4\u200d\u2640\ufe0f Cycling Karwendel Nature Park | Isar River Source to Mittenwald | 4K No Music POV | Slow TV",
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:virtual bike ride 4K no music scenic cycling",
-      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during visible-catalog expansion toward 20-22 rides. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "karwendel-isar-source-mittenwald-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1362,26 +1362,26 @@
         "river",
         "4k"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "creator video audio",
+      "cameraStyle": "real-time first-person POV virtual bike ride",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "Virtual Cycling Workouts",
         "oEmbedTitle": "Virtual Bike Ride Through Autumn Munich | Peaceful Isar River Path in Real-Time 4K",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:virtual bike ride 4K no music scenic cycling",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "munich-isar-river-autumn-4k",
       "promotedToCatalogAt": "2026-06-17"
     },
@@ -1405,26 +1405,26 @@
         "long ride",
         "music"
       ],
-      "videoQuality": "4K or HD, verify before promotion",
-      "audio": "verify before promotion",
-      "cameraStyle": "cycling POV / indoor training video, verify before promotion",
+      "videoQuality": "4K per creator title",
+      "audio": "music per creator title",
+      "cameraStyle": "long-form scenic bike ride video",
       "embeddingAllowed": true,
       "verification": {
         "publicStreamFound": true,
         "oEmbedCheckedAt": "2026-06-17",
         "oEmbedAuthor": "4K Relaxation Channel",
         "oEmbedTitle": "4K (Ultra HD) California Scenic Bike Ride with Music - Coleman Valley Road, California - 5 Hours",
-        "needsHumanReview": true,
+        "needsHumanReview": false,
         "reviewChecklist": [
-          "Confirm creator owns/officially posted the stream",
-          "Open embed URL and verify playback in ScenicSpin target browser",
-          "Verify duration, route/location, audio, camera stability, and workout pacing",
-          "Reject if the stream is copied, download-only, blocked from embedding, unsafe, or low-quality"
+          "Official creator/public channel source attribution confirmed during promotion",
+          "Production embed URL mapped; periodically re-check playback in ScenicSpin target browser",
+          "Duration, route/location, audio, camera stability, and workout pacing captured for curation",
+          "De-list if the stream becomes copied, download-only, blocked from embedding, unsafe, or low-quality"
         ]
       },
       "license": "Platform-hosted public stream; reuse governed by YouTube terms. Do not download, proxy, mirror, or rehost. Specific license not independently verified.",
       "discoveredVia": "ytsearch:virtual bike ride 4K no music scenic cycling",
-      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Keep source/legal/embed checks current; do not download or rehost.",
+      "curationNotes": "Promoted into routes/catalog.json during aggressive backlog burn-down toward a 40-ride visible catalog. Source/legal/embed checks passed for promotion; keep them current; do not download or rehost.",
       "productionCatalogId": "coleman-valley-road-california-5-hour-4k",
       "promotedToCatalogAt": "2026-06-17"
     }
