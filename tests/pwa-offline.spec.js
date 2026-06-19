@@ -1,4 +1,8 @@
 const { test, expect } = require('@playwright/test');
+const { siteConfig } = require('../playwright.config');
+const ACTIVITY_NOUN = siteConfig.activityNoun;
+const ACTIVITY_NOUN_S = siteConfig.activityNounSingular;
+
 
 test.use({ serviceWorkers: 'allow' });
 
@@ -25,7 +29,7 @@ async function waitForServiceWorkerControl(page) {
 
 test('service worker keeps the app shell and route data usable offline', async ({ page, context }) => {
   await page.goto('/', { waitUntil: 'networkidle' });
-  await expect(page.locator('#resultCount')).toHaveText(/^\d+ rides?$/);
+  await expect(page.locator('#resultCount')).toHaveText(/^\d+ / + ACTIVITY_NOUN + /?$/);
   await expect(page.locator('.route-card').first()).toBeVisible();
 
   await waitForServiceWorkerControl(page);

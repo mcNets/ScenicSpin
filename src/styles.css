@@ -88,6 +88,23 @@ main,
   text-decoration: none;
 }
 
+.sister-pill {
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.sister-pill:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(19rem, 26rem);
@@ -1226,6 +1243,10 @@ a:focus-visible {
   .ride-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .sister-pill {
+    display: none;
   }
 
   .hero-grid {

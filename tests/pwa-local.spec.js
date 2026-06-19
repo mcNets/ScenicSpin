@@ -1,14 +1,21 @@
 const { test, expect } = require('@playwright/test');
+const { siteConfig } = require('../playwright.config');
+const SITE_NAME = siteConfig.siteName;
+const ACTIVITY_NOUN = siteConfig.activityNoun;           // 'rides' or 'walks'
+const ACTIVITY_NOUN_S = siteConfig.activityNounSingular; // 'ride' or 'walk'
+const BG_COLOR = siteConfig.bgColor;
+const CACHE_NAME = siteConfig.cacheName;
+
 
 async function loadCatalog(page) {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('#resultCount')).toHaveText(/^\d+ rides?$/);
+  await expect(page.locator('#resultCount')).toHaveText(/^\d+ ${ACTIVITY_NOUN_S}s?$/);
   await expect(page.locator('.route-card').first()).toBeVisible();
 }
 
 async function loadCatalogStatus(page) {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('#resultCount')).toHaveText(/^\d+ rides?$/);
+  await expect(page.locator('#resultCount')).toHaveText(/^\d+ ${ACTIVITY_NOUN_S}s?$/);
 }
 
 test.beforeEach(async ({ page }) => {
@@ -37,12 +44,12 @@ test('loads the production JSON route catalog and exposes PWA assets', async ({ 
   expect(manifest.ok()).toBeTruthy();
   const manifestJson = await manifest.json();
   expect(manifestJson).toMatchObject({
-    name: 'PedalScape',
+    name: SITE_NAME,
     start_url: './',
     scope: './',
     display: 'standalone',
-    background_color: '#061318',
-    theme_color: '#061318'
+    background_color: BG_COLOR,
+    theme_color: BG_COLOR
   });
   expect(manifestJson.icons).toEqual(expect.arrayContaining([
     expect.objectContaining({ sizes: '192x192', purpose: expect.stringContaining('maskable') }),
@@ -167,7 +174,7 @@ test('candidate backlog stays hidden until review mode and exports local decisio
   await page.locator('.candidate-card').first().locator('.candidate-note-input').fill('Looks like a strong fit.');
   await expect(page.locator('.candidate-card').first().locator('.review-decision-badge')).toHaveText('Promote/Yes');
   await expect
-    .poll(() => page.evaluate(() => localStorage.getItem('PedalScape.reviewDecisions')))
+    .poll(() => page.evaluate(() => localStorage.getItem(`${SITE_NAME}.reviewDecisions`)))
     .toContain(backlog.candidateRoutes[0].id);
 
   const exportData = await page.evaluate(() => {
@@ -321,7 +328,7 @@ test('install prompt surfaces install button and handles acceptance', async ({ p
 
   await page.locator('#installButton').click();
   await expect(page.locator('#installButton')).toBeHidden();
-  await expect(page.locator('#appStatus')).toHaveText('PedalScape installed.');
+  await expect(page.locator('#appStatus')).toHaveText(`${SITE_NAME} installed.`);
 });
 
 test('exports only PedalScape local data and imports a validated backup', async ({ page }) => {
@@ -339,7 +346,7 @@ test('exports only PedalScape local data and imports a validated backup', async 
     button.click();
     return JSON.parse(document.querySelector('#backupJsonOutput').value);
   });
-  expect(backup).toMatchObject({ app: 'PedalScape', schemaVersion: 1 });
+  expect(backup).toMatchObject({ app: SITE_NAME, schemaVersion: 1 });
   expect(Object.keys(backup.localData).sort()).toEqual([
     'favoriteRouteIds',
     'filterPreferences',
@@ -352,7 +359,7 @@ test('exports only PedalScape local data and imports a validated backup', async 
   await firstCard.click();
   const firstRouteId = await page.evaluate(() => localStorage.getItem('scenicRideCatalog.selectedRouteId'));
   const importBackup = {
-    app: 'PedalScape',
+    app: SITE_NAME,
     schemaVersion: 1,
     localData: {
       selectedRouteId: firstRouteId,
@@ -384,6 +391,6 @@ test('rejects invalid local backup before writing app data', async ({ page }) =>
     buffer: Buffer.from(JSON.stringify({ app: 'OtherApp', schemaVersion: 1, localData: {} }))
   });
 
-  await expect(page.locator('#appStatus')).toContainText('Import failed: Backup is not for PedalScape.');
+  await expect(page.locator('#appStatus')).toContainText('Import failed: `Backup is not for ${SITE_NAME}`.');
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem('scenicRideCatalog.favoriteRouteIds')))).toEqual(['keep-me']);
 });
