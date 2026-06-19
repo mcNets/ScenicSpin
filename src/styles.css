@@ -1151,7 +1151,21 @@ a:focus-visible {
 
 .footer-links {
   display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+.footer-links .sister-link {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.footer-links .sister-link:hover {
+  background: var(--accent);
+  color: var(--accent-fg);
 }
 
 .footer-links a {

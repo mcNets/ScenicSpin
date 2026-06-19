@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="description" content="{{SITE_TAGLINE}} {{SITE_NAME}} is a local-first scenic cycling PWA for any indoor bike.">
+    <meta name="description" content="{{SITE_TAGLINE}} {{SITE_NAME}} is a local-first scenic {{ACTIVITY_VERB}} PWA for any indoor {{ACTIVITY_NOUN}}.">
     <meta name="apple-mobile-web-app-title" content="{{SITE_NAME}}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://{{SITE_DOMAIN}}/">
@@ -225,8 +225,14 @@
             {{SITE_NAME}} is an installable PWA for an app-like fullscreen ride experience. Videos remain
             hosted by their original creators and platforms; {{SITE_NAME}} only links or embeds them.
           </p>
+          <p>
+            Prefer {{SISTER_SITE_ACTIVITY}}?
+            <a href="{{SISTER_SITE_URL}}" target="_blank" rel="noopener">{{SISTER_SITE_NAME}}</a>
+            is the same app, tuned for your treadmill or your bike.
+          </p>
         </div>
         <div class="footer-links" aria-label="Footer links">
+          <a href="{{SISTER_SITE_URL}}" class="sister-link" target="_blank" rel="noopener">Try {{SISTER_SITE_NAME}} →</a>
           <a href="https://github.com/shanselman/ScenicSpin" target="_blank" rel="noopener">View source on GitHub</a>
         </div>
       </div>

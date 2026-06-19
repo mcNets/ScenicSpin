@@ -58,6 +58,9 @@ const tokens = {
   '{{OG_IMAGE_FILE}}':       config.ogImageFile,
   '{{OG_IMAGE_ALT}}':        config.ogImageAlt,
   '{{MANIFEST_DESC}}':       config.manifestDescription,
+  '{{SISTER_SITE_NAME}}':    config.sisterSiteName,
+  '{{SISTER_SITE_URL}}':     config.sisterSiteUrl,
+  '{{SISTER_SITE_ACTIVITY}}': config.sisterSiteActivity,
 };
 
 function replaceTokens(str) {
