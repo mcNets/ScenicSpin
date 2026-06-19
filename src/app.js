@@ -38,6 +38,67 @@ const candidateDecisionLabels = {
   defer: 'Defer/Maybe'
 };
 
+let i18n = {};
+
+async function loadLocale() {
+  const stored = localStorage.getItem('lang');
+  const browserLang = navigator.language?.split('-')[0] || 'en';
+  const lang = stored || browserLang;
+  const supported = ['en', 'es', 'fr', 'it', 'tr'];
+  const target = supported.includes(lang) ? lang : 'en';
+  try {
+    const res = await fetch(`locales/${target}.json`);
+    i18n = await res.json();
+  } catch {
+    // fallback silently — strings stay as hardcoded English
+  }
+  document.documentElement.lang = target;
+  applyStaticI18n();
+  applyLangSwitcherActive(target);
+}
+
+function t(key, vars = {}) {
+  let str = i18n[key] || key;
+  for (const [k, v] of Object.entries(vars)) {
+    str = str.replaceAll(`{{${k}}}`, v);
+  }
+  return str;
+}
+
+function applyStaticI18n() {
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const varsAttr = el.getAttribute('data-i18n-vars');
+    const vars = varsAttr ? JSON.parse(varsAttr) : {};
+    el.textContent = t(key, vars);
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-html');
+    el.innerHTML = t(key);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    el.placeholder = t(key);
+  });
+}
+
+function applyLangSwitcherActive(lang) {
+  document.querySelectorAll('.lang-switcher a').forEach((el) => {
+    el.classList.toggle('active-lang', el.dataset.lang === lang);
+  });
+}
+
+function bindLangSwitcher() {
+  document.querySelectorAll('.lang-switcher a').forEach((el) => {
+    el.addEventListener('click', (event) => {
+      event.preventDefault();
+      const lang = el.dataset.lang;
+      localStorage.setItem('lang', lang);
+      window.location.reload();
+    });
+  });
+}
+
 const state = {
   selectedRoute: null,
   featuredRoute: null,
@@ -120,13 +181,13 @@ function escapeHtml(value) {
 }
 
 function formatDuration(minutes) {
-  if (!Number.isFinite(minutes)) return 'Unknown';
+  if (!Number.isFinite(minutes)) return t('duration_unknown');
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
 
-  if (hours === 0) return `${minutes} min`;
-  if (remainingMinutes === 0) return `${hours} hr`;
-  return `${hours} hr ${remainingMinutes} min`;
+  if (hours === 0) return t('duration_minutes', { minutes });
+  if (remainingMinutes === 0) return t('duration_hours', { hours });
+  return t('duration_hours_minutes', { hours, minutes: remainingMinutes });
 }
 
 function extractYouTubeId(route) {
@@ -277,7 +338,7 @@ function getRouteMetadataBadges(route) {
 }
 
 function getThumbnailAltText(route) {
-  return `Scenic preview for ${route.title}.`;
+  return t('thumbnail_alt', { title: route.title });
 }
 
 function readStoredRouteId() {
@@ -353,7 +414,7 @@ function normalizeCandidateReviewDecisions(value) {
       return decisions;
     }
 
-    const decision = Object.prototype.hasOwnProperty.call(candidateDecisionLabels, review.decision) ? review.decision : '';
+    const decision = ['promote', 'reject', 'defer'].includes(review.decision) ? review.decision : '';
     const note = typeof review.note === 'string' ? review.note : '';
     if (decision || note.trim()) decisions[candidateId] = { decision, note };
     return decisions;
@@ -422,7 +483,7 @@ function getCandidateReview(candidateId) {
 }
 
 function getCandidateReviewLabel(decision) {
-  return candidateDecisionLabels[decision] || 'Unreviewed';
+  return candidateDecisionLabels[decision] || t('candidate_decision_unreviewed');
 }
 
 function setCandidateReviewDecision(candidateId, decision) {
@@ -439,7 +500,7 @@ function setCandidateReviewDecision(candidateId, decision) {
     state.candidateReviewDecisions[candidateId] = nextReview;
   }
 
-  state.reviewDecisionStatus = `${getCandidateReviewLabel(nextDecision)} saved locally. Export decisions to send them back to Copilot.`;
+  state.reviewDecisionStatus = t('candidate_decision_saved', { label: getCandidateReviewLabel(nextDecision) });
   saveCandidateReviewDecisions();
   renderCandidates();
 }
@@ -574,7 +635,7 @@ function downloadLocalBackup() {
   anchor.click();
   anchor.remove();
   URL.revokeObjectURL(url);
-  setAppStatus('Local backup downloaded. No account or cloud sync needed.');
+  setAppStatus(t('export_success'));
 }
 
 async function copyLocalBackup() {
@@ -584,9 +645,9 @@ async function copyLocalBackup() {
 
   try {
     await navigator.clipboard.writeText(backupJson);
-    setAppStatus('Backup JSON copied to clipboard and shown below.');
+    setAppStatus(t('copy_success'));
   } catch {
-    setAppStatus('Backup JSON shown below. Select and copy it to save a manual backup.');
+    setAppStatus(t('copy_fallback'));
   }
 }
 
@@ -626,9 +687,9 @@ async function importLocalBackup(file) {
     const backup = JSON.parse(await file.text());
     const data = validateLocalBackup(backup);
     applyImportedLocalData(data);
-    setAppStatus('Local backup imported. Stale route IDs were ignored.');
+    setAppStatus(t('import_success'));
   } catch (error) {
-    setAppStatus(`Import failed: ${error.message}`);
+    setAppStatus(t('import_failed', { message: error.message }));
   } finally {
     elements.importDataInput.value = '';
   }
@@ -724,8 +785,8 @@ function getCandidateBadges(candidate) {
   return [
     cleanCandidateQualityBadge(candidate),
     cleanCandidateAudioBadge(candidate),
-    candidate.embeddingAllowed || candidate.embedUrl ? 'Embed OK' : '',
-    candidate.promotionReadiness === 'promoted-to-production' ? 'Promoted' : 'Needs review'
+    candidate.embeddingAllowed || candidate.embedUrl ? t('candidate_badge_embed_ok') : '',
+    candidate.promotionReadiness === 'promoted-to-production' ? t('candidate_badge_promoted') : t('candidate_badge_needs_review')
   ].filter(Boolean);
 }
 
@@ -781,9 +842,9 @@ async function copyReviewDecisions() {
 
   try {
     await navigator.clipboard.writeText(exportText);
-    state.reviewDecisionStatus = `${decisions.length} review decision${decisions.length === 1 ? '' : 's'} copied. Paste this back to Copilot.`;
+    state.reviewDecisionStatus = t('candidate_copy_success', { count: decisions.length, decision_label: decisions.length === 1 ? t('candidate_decisions_one') : t('candidate_decisions_other') });
   } catch {
-    state.reviewDecisionStatus = `${decisions.length} review decision${decisions.length === 1 ? '' : 's'} shown below. Select and copy it back to Copilot.`;
+    state.reviewDecisionStatus = t('candidate_copy_fallback', { count: decisions.length, decision_label: decisions.length === 1 ? t('candidate_decisions_one') : t('candidate_decisions_other') });
   }
 
   renderCandidates();
@@ -827,8 +888,8 @@ function populateFilter(select, values, formatLabel = titleCase) {
 }
 
 function populateFilters() {
-  resetFilter(elements.sceneryFilter, 'Any scenery');
-  resetFilter(elements.intensityFilter, 'Any intensity');
+  resetFilter(elements.sceneryFilter, t('filter_scenery_any'));
+  resetFilter(elements.intensityFilter, t('filter_intensity_any'));
   populateFilter(elements.sceneryFilter, uniqueSceneryTags(), (value) => value);
   populateFilter(elements.intensityFilter, uniqueValues('intensity'));
 }
@@ -868,7 +929,7 @@ function routeMatches(route) {
 
 function renderLocalPanel() {
   const favoriteCount = state.favoriteRouteIds.size;
-  elements.favoriteCount.textContent = `${favoriteCount} favorite${favoriteCount === 1 ? '' : 's'}`;
+  elements.favoriteCount.textContent = favoriteCount === 1 ? t('favorite_count_one') : t('favorite_count_other', { count: favoriteCount });
   elements.recentRoutes.innerHTML = '';
 
   const recentRoutes = state.recentRouteIds
@@ -876,7 +937,7 @@ function renderLocalPanel() {
     .filter(Boolean);
 
   if (recentRoutes.length === 0) {
-    elements.recentRoutes.innerHTML = '<span class="local-empty">Select or start a {{ACTIVITY_NOUN_SINGULAR}} to build recent routes.</span>';
+    elements.recentRoutes.innerHTML = `<span class="local-empty">${escapeHtml(t('recent_empty'))}</span>`;
     return;
   }
 
@@ -915,18 +976,18 @@ function setHeroImage(route) {
 
   image.src = route.thumbnailUrl;
   image.dataset.fallback = route.thumbnailFallbackUrl;
-  image.alt = `Preview image for ${route.title}`;
+  image.alt = t('preview_alt', { title: route.title });
 }
 
 function renderHeroRoute() {
   const route = state.featuredRoute;
 
   if (!route) {
-    elements.heroLabel.innerHTML = '<span class="status-dot" aria-hidden="true"></span> Loading catalog {{ACTIVITY_NOUN_SINGULAR}}';
-    elements.heroSelection.textContent = 'Choose a route below';
+    elements.heroLabel.innerHTML = `<span class="status-dot" aria-hidden="true"></span> ${escapeHtml(t('hero_label_loading'))}`;
+    elements.heroSelection.textContent = t('hero_selection_default');
     elements.heroMetadata.textContent = '';
     elements.heroRouteButton.disabled = true;
-    elements.heroRouteButton.textContent = 'Start this {{ACTIVITY_NOUN_SINGULAR}}';
+    elements.heroRouteButton.textContent = t('hero_start_button');
     elements.heroRouteButton.removeAttribute('aria-label');
     elements.heroImage.hidden = true;
     elements.heroImageFallback.hidden = false;
@@ -935,11 +996,11 @@ function renderHeroRoute() {
   }
 
   const isContinue = state.heroMode === 'continue';
-  elements.heroLabel.innerHTML = `<span class="status-dot" aria-hidden="true"></span> ${isContinue ? 'Continue {{ACTIVITY_NOUN_SINGULAR}}' : 'Recommended first {{ACTIVITY_NOUN_SINGULAR}}'}`;
+  elements.heroLabel.innerHTML = `<span class="status-dot" aria-hidden="true"></span> ${escapeHtml(isContinue ? t('hero_label_continue') : t('hero_label_recommended'))}`;
   elements.heroSelection.textContent = route.title;
-  elements.heroMetadata.textContent = `${route.location} · ${route.durationLabel} · ${route.intensity} · from routes/catalog.json`;
+  elements.heroMetadata.textContent = t('hero_metadata', { location: route.location, duration: route.durationLabel, intensity: route.intensity });
   elements.heroRouteButton.disabled = false;
-  elements.heroRouteButton.textContent = isContinue ? 'Continue this {{ACTIVITY_NOUN_SINGULAR}}' : 'Start recommended {{ACTIVITY_NOUN_SINGULAR}}';
+  elements.heroRouteButton.textContent = isContinue ? t('hero_button_continue') : t('hero_button_recommended');
   elements.heroRouteButton.setAttribute('aria-label', `${elements.heroRouteButton.textContent}: ${route.title}`);
   setHeroImage(route);
 }
@@ -975,34 +1036,34 @@ function renderCatalog() {
   renderLocalPanel();
 
   if (state.catalogStatus === 'loading') {
-    elements.resultCount.textContent = 'Loading…';
-    renderStatus('Loading curated routes…');
+    elements.resultCount.textContent = t('catalog_loading_count');
+    renderStatus(t('catalog_loading'));
     return;
   }
 
   if (state.catalogStatus === 'error') {
-    elements.resultCount.textContent = 'Catalog unavailable';
-    renderStatus('Could not load routes/catalog.json.', 'Run the app through the local server and try again.');
+    elements.resultCount.textContent = t('catalog_error_title');
+    renderStatus(t('catalog_error'), t('catalog_error_detail'));
     return;
   }
 
   if (routes.length === 0) {
-    elements.resultCount.textContent = '0 {{ACTIVITY_NOUN}}';
-    renderStatus('No routes are available yet.', 'Add entries to routes/catalog.json to populate the catalog.');
+    elements.resultCount.textContent = t('catalog_empty_count');
+    renderStatus(t('catalog_empty'), t('catalog_empty_detail'));
     return;
   }
 
   const visibleRoutes = routes.filter(routeMatches);
-  elements.resultCount.textContent = `${visibleRoutes.length} {{ACTIVITY_NOUN_SINGULAR}}${visibleRoutes.length === 1 ? '' : 's'}`;
+  elements.resultCount.textContent = visibleRoutes.length === 1 ? t('catalog_result_count_one') : t('catalog_result_count_other', { count: visibleRoutes.length });
 
   if (visibleRoutes.length === 0) {
-    renderStatus('No routes match these filters.', 'Try a different duration, scenery, intensity, or search term.');
+    renderStatus(t('catalog_no_match'), t('catalog_no_match_detail'));
     return;
   }
 
   visibleRoutes.forEach((route) => {
     const card = document.createElement('article');
-    const overlayBadges = (route.overlayBadges?.length ? route.overlayBadges : ['Video'])
+    const overlayBadges = (route.overlayBadges?.length ? route.overlayBadges : [t('badge_video')])
       .map((badge) => `<li>${escapeHtml(badge)}</li>`)
       .join('');
     const metadataBadges = (route.metadataBadges?.length ? route.metadataBadges : [route.intensity])
@@ -1021,7 +1082,7 @@ function renderCatalog() {
             : `<span aria-hidden="true">${escapeHtml(route.scenery)}</span>`
         }
         <ul class="route-card-badges" aria-label="Media badges">${overlayBadges}</ul>
-        <button class="favorite-card-button ${isFavorite(route.id) ? 'is-favorite' : ''}" type="button" aria-pressed="${isFavorite(route.id) ? 'true' : 'false'}" aria-label="${isFavorite(route.id) ? 'Remove favorite' : 'Save favorite'}: ${escapeHtml(route.title)}">
+        <button class="favorite-card-button ${isFavorite(route.id) ? 'is-favorite' : ''}" type="button" aria-pressed="${isFavorite(route.id) ? 'true' : 'false'}" aria-label="${isFavorite(route.id) ? t('card_favorite_remove') : t('card_favorite_save')}: ${escapeHtml(route.title)}">
           ${isFavorite(route.id) ? '★' : '☆'}
         </button>
       </div>
@@ -1029,7 +1090,7 @@ function renderCatalog() {
         <p class="route-location">${escapeHtml(route.location)}</p>
         <h3>${escapeHtml(route.title)}</h3>
         <ul class="pill-list route-metadata-badges" aria-label="Route decision metadata">${metadataBadges}</ul>
-        <span class="card-cta" aria-hidden="true">Preview {{ACTIVITY_NOUN_SINGULAR}} →</span>
+        <span class="card-cta" aria-hidden="true">${escapeHtml(t('card_cta_preview'))}</span>
       </div>
     `;
 
@@ -1089,26 +1150,32 @@ function renderCandidates() {
   elements.reviewDecisionStatus.textContent = state.reviewDecisionStatus;
 
   if (state.candidateStatus === 'loading') {
-    elements.candidateCount.textContent = 'Loading…';
-    renderCandidateStatus('Loading review backlog…');
+    elements.candidateCount.textContent = t('candidate_count_loading');
+    renderCandidateStatus(t('candidate_status_loading'));
     return;
   }
 
   if (state.candidateStatus === 'error') {
-    elements.candidateCount.textContent = 'Backlog unavailable';
-    renderCandidateStatus('Could not load routes/candidate-backlog.json.', 'The featured catalog is unaffected.');
+    elements.candidateCount.textContent = t('candidate_status_error_title');
+    renderCandidateStatus(t('candidate_error'), t('candidate_error_detail'));
     return;
   }
 
   if (candidateRoutes.length === 0) {
-    elements.candidateCount.textContent = '0 candidates';
-    renderCandidateStatus('No candidate backlog entries found.', 'Add entries to routes/candidate-backlog.json for review.');
+    elements.candidateCount.textContent = t('candidate_empty_count');
+    renderCandidateStatus(t('candidate_empty'), t('candidate_empty_detail'));
     return;
   }
 
   const needsReviewCount = candidateRoutes.filter((candidate) => candidate.promotionReadiness !== 'promoted-to-production').length;
   const localDecisionCount = candidateRoutes.filter((candidate) => state.candidateReviewDecisions[candidate.id]).length;
-  elements.candidateCount.textContent = `${candidateRoutes.length} backlog entr${candidateRoutes.length === 1 ? 'y' : 'ies'} · ${needsReviewCount} to review · ${localDecisionCount} local decision${localDecisionCount === 1 ? '' : 's'}`;
+  elements.candidateCount.textContent = t('candidate_count', {
+    total: candidateRoutes.length,
+    entries: candidateRoutes.length === 1 ? t('candidate_entries_one') : t('candidate_entries_other'),
+    needs_review: needsReviewCount,
+    decisions: localDecisionCount,
+    decision_label: localDecisionCount === 1 ? t('candidate_decisions_one') : t('candidate_decisions_other')
+  });
 
   candidateRoutes.forEach((candidate) => {
     const card = document.createElement('article');
@@ -1147,36 +1214,36 @@ function renderCandidates() {
         <span class="review-decision-badge review-decision-badge--${escapeHtml(review.decision || 'none')}">${escapeHtml(reviewLabel)}</span>
         <h3>${escapeHtml(candidate.title)}</h3>
         <dl class="candidate-meta">
-          <div><dt>Creator</dt><dd>${escapeHtml(candidate.creator || 'Unknown')}</dd></div>
-          <div><dt>Location</dt><dd>${escapeHtml(candidate.location || 'Needs review')}</dd></div>
+          <div><dt>${escapeHtml(t('candidate_meta_creator'))}</dt><dd>${escapeHtml(candidate.creator || t('candidate_meta_creator_empty'))}</dd></div>
+          <div><dt>${escapeHtml(t('candidate_meta_location'))}</dt><dd>${escapeHtml(candidate.location || t('candidate_meta_location_empty'))}</dd></div>
         </dl>
         <ul class="candidate-badges" aria-label="Candidate review badges">${badges}</ul>
         <ul class="pill-list" aria-label="Candidate tags">${tags || '<li>Needs tags</li>'}</ul>
         ${promotedNote}
         <div class="candidate-review-notes">
-          <button class="candidate-review-toggle" type="button" aria-expanded="false">Review notes</button>
+          <button class="candidate-review-toggle" type="button" aria-expanded="false">${escapeHtml(t('candidate_review_toggle'))}</button>
           <div class="candidate-review-content" hidden>
           <p>${escapeHtml(candidate.reviewNotes)}</p>
           ${checklist ? `<ul class="candidate-checklist" aria-label="Review checklist">${checklist}</ul>` : ''}
           </div>
         </div>
         <div class="candidate-actions">
-          <a class="secondary-button compact-button" href="${escapeHtml(candidate.sourceUrl)}" target="_blank" rel="noopener">Open source</a>
+          <a class="secondary-button compact-button" href="${escapeHtml(candidate.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(t('candidate_action_open_source'))}</a>
           ${
             candidate.embedUrl
-              ? `<a class="secondary-button compact-button" href="${escapeHtml(candidate.embedUrl)}" target="_blank" rel="noopener">Open embed</a>`
+              ? `<a class="secondary-button compact-button" href="${escapeHtml(candidate.embedUrl)}" target="_blank" rel="noopener">${escapeHtml(t('candidate_action_open_embed'))}</a>`
               : ''
           }
-          <button class="secondary-button compact-button copy-source-button" type="button" data-source-url="${escapeHtml(candidate.sourceUrl)}">Copy URL</button>
+          <button class="secondary-button compact-button copy-source-button" type="button" data-source-url="${escapeHtml(candidate.sourceUrl)}">${escapeHtml(t('candidate_action_copy_url'))}</button>
         </div>
         <div class="candidate-decision-controls" role="group" aria-label="Review decision for ${escapeHtml(candidate.title)}">
-          <button class="secondary-button compact-button decision-button decision-button--promote" type="button" data-candidate-id="${escapeHtml(candidate.id)}" data-decision="promote" aria-pressed="${review.decision === 'promote' ? 'true' : 'false'}">Promote/Yes</button>
-          <button class="secondary-button compact-button decision-button decision-button--reject" type="button" data-candidate-id="${escapeHtml(candidate.id)}" data-decision="reject" aria-pressed="${review.decision === 'reject' ? 'true' : 'false'}">Reject/No</button>
-          <button class="secondary-button compact-button decision-button decision-button--defer" type="button" data-candidate-id="${escapeHtml(candidate.id)}" data-decision="defer" aria-pressed="${review.decision === 'defer' ? 'true' : 'false'}">Defer/Maybe</button>
+          <button class="secondary-button compact-button decision-button decision-button--promote" type="button" data-candidate-id="${escapeHtml(candidate.id)}" data-decision="promote" aria-pressed="${review.decision === 'promote' ? 'true' : 'false'}">${escapeHtml(t('candidate_decision_promote'))}</button>
+          <button class="secondary-button compact-button decision-button decision-button--reject" type="button" data-candidate-id="${escapeHtml(candidate.id)}" data-decision="reject" aria-pressed="${review.decision === 'reject' ? 'true' : 'false'}">${escapeHtml(t('candidate_decision_reject'))}</button>
+          <button class="secondary-button compact-button decision-button decision-button--defer" type="button" data-candidate-id="${escapeHtml(candidate.id)}" data-decision="defer" aria-pressed="${review.decision === 'defer' ? 'true' : 'false'}">${escapeHtml(t('candidate_decision_defer'))}</button>
         </div>
         <label class="candidate-note-field">
-          <span>Optional note for Copilot</span>
-          <textarea class="candidate-note-input" data-candidate-id="${escapeHtml(candidate.id)}" rows="2" placeholder="Why yes/no/maybe?">${escapeHtml(review.note || '')}</textarea>
+          <span>${escapeHtml(t('candidate_note_label'))}</span>
+          <textarea class="candidate-note-input" data-candidate-id="${escapeHtml(candidate.id)}" rows="2" placeholder="${escapeHtml(t('candidate_note_placeholder'))}">${escapeHtml(review.note || '')}</textarea>
         </label>
       </div>
     `;
@@ -1199,14 +1266,15 @@ function renderCandidates() {
   }
 }
 
-function clearSelectedRoute(message = 'Choose a scenic {{ACTIVITY_NOUN_SINGULAR}} card above. The player supports YouTube embeds, fullscreen mode, and source links for browser fallback.') {
+function clearSelectedRoute(message) {
+  if (!message) message = t('selected_description_default');
   state.selectedRoute = null;
-  elements.selectedTitle.textContent = 'No route selected';
+  elements.selectedTitle.textContent = t('selected_title_empty');
   elements.selectedDescription.textContent = message;
   elements.selectedMetadata.innerHTML = '';
   elements.startRideButton.disabled = true;
   elements.favoriteRouteButton.disabled = true;
-  elements.favoriteRouteButton.textContent = 'Save favorite';
+  elements.favoriteRouteButton.textContent = t('favorite_button_save');
   elements.favoriteRouteButton.removeAttribute('aria-pressed');
   elements.sourceLink.href = '#';
   elements.sourceLink.classList.add('disabled-link');
@@ -1214,7 +1282,7 @@ function clearSelectedRoute(message = 'Choose a scenic {{ACTIVITY_NOUN_SINGULAR}
   elements.playerShell.innerHTML = `
     <div class="player-placeholder">
       <span aria-hidden="true">▶</span>
-      <p>Select a route to load the {{ACTIVITY_NOUN_SINGULAR}} video.</p>
+      <p>${escapeHtml(t('player_placeholder'))}</p>
     </div>
   `;
 }
@@ -1230,20 +1298,20 @@ function renderSelectedRoute() {
   elements.selectedTitle.textContent = route.title;
   elements.selectedDescription.textContent = route.description;
   elements.selectedMetadata.innerHTML = `
-    <div><dt>Duration</dt><dd>${escapeHtml(route.durationLabel)}</dd></div>
-    <div><dt>Difficulty</dt><dd>${escapeHtml(route.intensity)}</dd></div>
-    <div><dt>Terrain</dt><dd>${escapeHtml(route.terrain || 'Not specified')}</dd></div>
-    <div><dt>Location</dt><dd>${escapeHtml(route.location)}</dd></div>
-    <div><dt>Creator</dt><dd>${escapeHtml(route.creator || 'Unknown')}</dd></div>
-    <div><dt>Video</dt><dd>${escapeHtml((route.overlayBadges?.length ? route.overlayBadges : ['Video']).join(' · '))}</dd></div>
+    <div><dt>${escapeHtml(t('metadata_duration'))}</dt><dd>${escapeHtml(route.durationLabel)}</dd></div>
+    <div><dt>${escapeHtml(t('metadata_difficulty'))}</dt><dd>${escapeHtml(route.intensity)}</dd></div>
+    <div><dt>${escapeHtml(t('metadata_terrain'))}</dt><dd>${escapeHtml(route.terrain || t('metadata_terrain_empty'))}</dd></div>
+    <div><dt>${escapeHtml(t('metadata_location'))}</dt><dd>${escapeHtml(route.location)}</dd></div>
+    <div><dt>${escapeHtml(t('metadata_creator'))}</dt><dd>${escapeHtml(route.creator || t('metadata_creator_empty'))}</dd></div>
+    <div><dt>${escapeHtml(t('metadata_video'))}</dt><dd>${escapeHtml((route.overlayBadges?.length ? route.overlayBadges : [t('badge_video')]).join(' · '))}</dd></div>
   `;
   elements.startRideButton.disabled = !route.embeddingAllowed;
   elements.favoriteRouteButton.disabled = false;
-  elements.favoriteRouteButton.textContent = isFavorite(route.id) ? 'Favorited ★' : 'Save favorite ☆';
+  elements.favoriteRouteButton.textContent = isFavorite(route.id) ? t('favorite_button_active') : t('favorite_button_save');
   elements.favoriteRouteButton.setAttribute('aria-pressed', isFavorite(route.id) ? 'true' : 'false');
   elements.sourceLink.href = route.sourceUrl;
   elements.sourceLink.classList.remove('disabled-link');
-  elements.sourceLink.setAttribute('aria-label', `Open source video for ${route.title}`);
+  elements.sourceLink.setAttribute('aria-label', t('source_link_aria', { title: route.title }));
 }
 
 function toggleFavorite(routeId) {
@@ -1272,13 +1340,13 @@ function loadPlayer(route, autoplay = false) {
   elements.playerShell.innerHTML = '';
 
   if (!route.embeddingAllowed) {
-    elements.playerShell.innerHTML = '<p class="player-message">Embedding is not marked as allowed for this route. Use Open source instead.</p>';
+    elements.playerShell.innerHTML = `<p class="player-message">${escapeHtml(t('player_embed_not_allowed'))}</p>`;
     return;
   }
 
   if (route.sourceType === 'youtube' && route.videoId) {
     const iframe = document.createElement('iframe');
-    iframe.title = `${route.title} {{ACTIVITY_NOUN_SINGULAR}} video`;
+    iframe.title = t('player_iframe_title', { title: route.title });
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.allowFullscreen = true;
     iframe.src = buildEmbedUrl(route, autoplay);
@@ -1325,7 +1393,7 @@ function createPwaFullscreenCloseButton() {
   btn = document.createElement('button');
   btn.id = 'pwaFullscreenClose';
   btn.type = 'button';
-  btn.setAttribute('aria-label', 'Exit fullscreen');
+  btn.setAttribute('aria-label', t('fullscreen_close_aria'));
   btn.textContent = '\u2715';
   btn.addEventListener('click', exitPwaFullscreen);
   elements.playerShell.appendChild(btn);
@@ -1371,7 +1439,7 @@ function updateFullscreenButton() {
     document.webkitFullscreenElement ||
     elements.playerShell.classList.contains('pwa-fullscreen')
   );
-  elements.fullscreenButton.textContent = isFullscreen ? 'Exit fullscreen' : 'Fullscreen';
+  elements.fullscreenButton.textContent = isFullscreen ? t('fullscreen_exit') : t('fullscreen_enter');
   elements.fullscreenButton.setAttribute('aria-pressed', isFullscreen ? 'true' : 'false');
 }
 
@@ -1392,7 +1460,7 @@ async function copyCandidateSource(sourceUrl) {
 
   try {
     await navigator.clipboard.writeText(sourceUrl);
-    state.candidateCopyMessage = 'Source URL copied.';
+    state.candidateCopyMessage = t('candidate_url_copied');
   } catch {
     state.candidateCopyMessage = sourceUrl;
   }
@@ -1440,7 +1508,7 @@ function resetLocalData() {
     renderCatalog();
   }
 
-  setAppStatus('Local data reset.');
+  setAppStatus(t('reset_success'));
 }
 
 async function installApp() {
@@ -1449,7 +1517,7 @@ async function installApp() {
   const result = await deferredInstallPrompt.userChoice;
   if (result.outcome === 'accepted') {
     elements.installButton.hidden = true;
-    setAppStatus('{{SITE_NAME}} installed.');
+    setAppStatus(t('app_installed'));
   }
   deferredInstallPrompt = null;
 }
@@ -1535,7 +1603,7 @@ function bindEvents() {
   elements.candidateGrid.addEventListener('input', (event) => {
     if (!event.target.classList.contains('candidate-note-input')) return;
     setCandidateReviewNote(event.target.dataset.candidateId, event.target.value);
-    state.reviewDecisionStatus = 'Note saved locally. Export decisions to send them back to Copilot.';
+    state.reviewDecisionStatus = t('candidate_note_saved');
     elements.reviewDecisionStatus.textContent = state.reviewDecisionStatus;
   });
   elements.fullscreenButton.addEventListener('click', () => {
@@ -1552,12 +1620,12 @@ function bindEvents() {
     event.preventDefault();
     deferredInstallPrompt = event;
     elements.installButton.hidden = false;
-    setAppStatus('Install available for offline app shell.');
+    setAppStatus(t('install_available'));
   });
   window.addEventListener('appinstalled', () => {
     deferredInstallPrompt = null;
     elements.installButton.hidden = true;
-    setAppStatus('{{SITE_NAME}} installed.');
+    setAppStatus(t('app_installed'));
   });
   window.addEventListener('hashchange', applyReviewModeFromUrl);
 }
@@ -1565,7 +1633,7 @@ function bindEvents() {
 async function loadCatalog() {
   state.catalogStatus = 'loading';
   setControlsDisabled(true);
-  clearSelectedRoute('Loading curated routes from routes/catalog.json…');
+  clearSelectedRoute(t('catalog_loading_detail'));
   renderCatalog();
 
   try {
@@ -1587,7 +1655,7 @@ async function loadCatalog() {
       selectRoute(featured.route.id, false, { persist: featured.mode === 'continue', updateHero: false });
     } else {
       setFeaturedRoute(null);
-      clearSelectedRoute('routes/catalog.json loaded, but it does not contain any routes yet.');
+      clearSelectedRoute(t('catalog_loaded_empty'));
     }
   } catch (error) {
     console.error(error);
@@ -1595,7 +1663,7 @@ async function loadCatalog() {
     state.catalogStatus = 'error';
     setControlsDisabled(true);
     setFeaturedRoute(null);
-    clearSelectedRoute('The route catalog could not be loaded. Start the static server and refresh.');
+    clearSelectedRoute(t('catalog_load_error'));
     renderCatalog();
   }
 }
@@ -1642,7 +1710,7 @@ function registerServiceWorker() {
 
           worker.addEventListener('statechange', () => {
             if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-              setAppStatus('Update ready. Refreshing {{SITE_NAME}}…');
+              setAppStatus(t('update_ready'));
             }
           });
         });
@@ -1653,7 +1721,9 @@ function registerServiceWorker() {
   });
 }
 
-function init() {
+async function init() {
+  await loadLocale();
+  bindLangSwitcher();
   loadLocalState();
   bindEvents();
   loadCatalog();

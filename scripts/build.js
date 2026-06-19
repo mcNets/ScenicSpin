@@ -123,6 +123,19 @@ console.log(`  ✓ assets/`);
 // Copy routes — catalog + candidate-backlog
 fs.mkdirSync(path.join(outDir, 'routes'), { recursive: true });
 
+// Copy and process locales (token replacement applied)
+const localesDir = 'locales';
+if (fs.existsSync(localesDir)) {
+  const localeOutDir = path.join(outDir, 'locales');
+  fs.mkdirSync(localeOutDir, { recursive: true });
+  for (const file of fs.readdirSync(localesDir)) {
+    if (!file.endsWith('.json')) continue;
+    const processed = replaceTokens(fs.readFileSync(path.join(localesDir, file), 'utf8'));
+    fs.writeFileSync(path.join(localeOutDir, file), processed);
+  }
+  console.log(`  ✓ locales/ (token-replaced)`);
+}
+
 const catalogSrc = path.join('routes', config.catalogFile);
 if (fs.existsSync(catalogSrc)) {
   // Always output as catalog.json so app.js doesn't need to know the site

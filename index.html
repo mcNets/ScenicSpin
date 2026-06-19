@@ -39,15 +39,22 @@
           <img class="brand-mark" src="icons/app-icon.svg" alt="" aria-hidden="true">
           {{SITE_NAME}}
         </a>
-        <a class="skip-link" href="#player">Skip to player</a>
+        <a class="skip-link" href="#player" data-i18n="skip_link">Skip to player</a>
+        <span class="lang-switcher" aria-label="Language">
+          <a href="#" data-lang="en">EN</a>
+          <a href="#" data-lang="es">ES</a>
+          <a href="#" data-lang="fr">FR</a>
+          <a href="#" data-lang="it">IT</a>
+          <a href="#" data-lang="tr">TR</a>
+        </span>
         <a class="sister-pill" href="{{SISTER_SITE_URL}}" target="_blank" rel="noopener">{{SISTER_SITE_EMOJI}} {{SISTER_SITE_NAME}}</a>
       </nav>
 
       <section class="hero-grid" aria-labelledby="heroTitle">
         <div>
-          <p class="eyebrow">Indoor {{ACTIVITY_DEVICE}} + scenic escape</p>
+          <p class="eyebrow" data-i18n="hero_eyebrow">Indoor {{ACTIVITY_DEVICE}} + scenic escape</p>
           <h1 id="heroTitle">{{SITE_TAGLINE}}</h1>
-          <p class="hero-copy">
+          <p class="hero-copy" data-i18n="hero_copy">
             Jump into curated scenic {{ACTIVITY_VERB}} routes, then launch a fullscreen {{ACTIVITY_NOUN_SINGULAR}} on
             your laptop, tablet, or TV.
           </p>
@@ -57,10 +64,10 @@
             <img id="heroImage" alt="" hidden>
             <span id="heroImageFallback" aria-hidden="true">{{ACTIVITY_NOUN_SINGULAR_CAP}}</span>
           </div>
-          <p id="heroLabel"><span class="status-dot" aria-hidden="true"></span> Loading catalog {{ACTIVITY_NOUN_SINGULAR}}</p>
-          <strong id="heroSelection">Choose a route below</strong>
+          <p id="heroLabel"><span class="status-dot" aria-hidden="true"></span> <span data-i18n="hero_label_loading">Loading catalog {{ACTIVITY_NOUN_SINGULAR}}</span></p>
+          <strong id="heroSelection" data-i18n="hero_selection_default">Choose a route below</strong>
           <span id="heroMetadata" class="hero-metadata"></span>
-          <button id="heroRouteButton" class="primary-button hero-cta" type="button" disabled>Start this {{ACTIVITY_NOUN_SINGULAR}}</button>
+          <button id="heroRouteButton" class="primary-button hero-cta" type="button" disabled data-i18n="hero_start_button">Start this {{ACTIVITY_NOUN_SINGULAR}}</button>
         </aside>
       </section>
     </header>
@@ -68,43 +75,43 @@
     <main>
       <section class="controls-panel" aria-labelledby="filterTitle">
         <div class="filter-heading">
-          <p class="eyebrow">Find a {{ACTIVITY_NOUN_SINGULAR}}</p>
-          <h2 id="filterTitle">Search and filter</h2>
+          <p class="eyebrow" data-i18n="filter_eyebrow">Find a {{ACTIVITY_NOUN_SINGULAR}}</p>
+          <h2 id="filterTitle" data-i18n="filter_title">Search and filter</h2>
           <div class="quick-links" aria-label="{{ACTIVITY_NOUN_SINGULAR_CAP}} shortcuts">
-            <a href="#catalog">Browse routes</a>
-            <a href="#player">Selected {{ACTIVITY_NOUN_SINGULAR}}</a>
-            <a href="#localData">Saved {{ACTIVITY_NOUN}}</a>
+            <a href="#catalog" data-i18n="quick_link_browse">Browse routes</a>
+            <a href="#player" data-i18n="quick_link_selected">Selected {{ACTIVITY_NOUN_SINGULAR}}</a>
+            <a href="#localData" data-i18n="quick_link_saved">Saved {{ACTIVITY_NOUN}}</a>
           </div>
         </div>
         <label class="search-field">
-          <span>Search routes</span>
-          <input id="searchInput" type="search" placeholder="Try Colorado, canyon, city..." autocomplete="off">
+          <span data-i18n="search_label">Search routes</span>
+          <input id="searchInput" type="search" placeholder="Try Colorado, canyon, city..." data-i18n-placeholder="search_placeholder" autocomplete="off">
         </label>
         <div class="filter-row" aria-label="{{ACTIVITY_NOUN_SINGULAR_CAP}} filters">
           <label>
-            <span>Duration</span>
+            <span data-i18n="filter_duration_label">Duration</span>
             <select id="durationFilter">
-              <option value="all">Any duration</option>
-              <option value="short">Under 20 min</option>
-              <option value="standard">20–60 min</option>
-              <option value="long">60+ min</option>
+              <option value="all" data-i18n="filter_duration_any">Any duration</option>
+              <option value="short" data-i18n="filter_duration_short">Under 20 min</option>
+              <option value="standard" data-i18n="filter_duration_standard">20–60 min</option>
+              <option value="long" data-i18n="filter_duration_long">60+ min</option>
             </select>
           </label>
           <label>
-            <span>Scenery</span>
+            <span data-i18n="filter_scenery_label">Scenery</span>
             <select id="sceneryFilter">
-              <option value="all">Any scenery</option>
+              <option value="all" data-i18n="filter_scenery_any">Any scenery</option>
             </select>
           </label>
           <label>
-            <span>Intensity</span>
+            <span data-i18n="filter_intensity_label">Intensity</span>
             <select id="intensityFilter">
-              <option value="all">Any intensity</option>
+              <option value="all" data-i18n="filter_intensity_any">Any intensity</option>
             </select>
           </label>
           <label class="toggle-field">
             <input id="favoritesFilter" type="checkbox">
-            <span>Favorites only</span>
+            <span data-i18n="filter_favorites_only">Favorites only</span>
           </label>
         </div>
       </section>
@@ -112,8 +119,8 @@
       <section id="catalog" class="catalog-section" aria-labelledby="catalogTitle">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Route catalog</p>
-            <h2 id="catalogTitle">Curated scenic {{ACTIVITY_NOUN}}</h2>
+            <p class="eyebrow" data-i18n="catalog_eyebrow">Route catalog</p>
+            <h2 id="catalogTitle" data-i18n="catalog_title">Curated scenic {{ACTIVITY_NOUN}}</h2>
           </div>
           <p id="resultCount" class="result-count" aria-live="polite"></p>
         </div>
@@ -124,19 +131,19 @@
         <details class="candidate-panel" open>
           <summary>
             <span>
-              <span class="eyebrow">Review candidates</span>
-              <strong id="candidateTitle">Candidate backlog</strong>
+              <span class="eyebrow" data-i18n="candidate_eyebrow">Review candidates</span>
+              <strong id="candidateTitle" data-i18n="candidate_title">Candidate backlog</strong>
             </span>
-            <span id="candidateCount" class="result-count" aria-live="polite">Loading…</span>
+            <span id="candidateCount" class="result-count" aria-live="polite" data-i18n="candidate_count_loading">Loading…</span>
           </summary>
-          <p class="candidate-disclaimer">
+          <p class="candidate-disclaimer" data-i18n-html="candidate_disclaimer">
             Review mode is intentionally hidden from the public catalog. Open it with
             <code>?review=1</code> or <code>#review</code> when you want to triage candidates.
             These entries load from <code>routes/candidate-backlog.json</code> for review only.
             They are not mixed into the featured {{ACTIVITY_NOUN_SINGULAR}} catalog until promoted into <code>routes/catalog.json</code>.
           </p>
           <div class="candidate-review-toolbar">
-            <button id="exportReviewDecisionsButton" class="secondary-button compact-button" type="button">Export/copy review decisions</button>
+            <button id="exportReviewDecisionsButton" class="secondary-button compact-button" type="button" data-i18n="candidate_export_button">Export/copy review decisions</button>
             <span id="reviewDecisionStatus" class="candidate-copy-status" role="status" aria-live="polite"></span>
             <textarea id="reviewDecisionsOutput" class="backup-json-output" readonly hidden aria-label="{{SITE_NAME}} review decisions export"></textarea>
           </div>
@@ -147,32 +154,32 @@
       <section id="player" class="player-section" aria-labelledby="playerTitle">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">{{ACTIVITY_NOUN_SINGULAR_CAP}} mode</p>
-            <h2 id="playerTitle">Selected route</h2>
+            <p class="eyebrow" data-i18n="player_eyebrow">{{ACTIVITY_NOUN_SINGULAR_CAP}} mode</p>
+            <h2 id="playerTitle" data-i18n="player_title">Selected route</h2>
           </div>
-          <button id="fullscreenButton" class="secondary-button" type="button">Fullscreen</button>
+          <button id="fullscreenButton" class="secondary-button" type="button" data-i18n="fullscreen_enter">Fullscreen</button>
         </div>
 
         <article class="selected-layout">
           <div id="playerShell" class="player-shell">
             <div id="playerPlaceholder" class="player-placeholder">
               <span aria-hidden="true">▶</span>
-              <p>Select a route to load the {{ACTIVITY_NOUN_SINGULAR}} video.</p>
+              <p data-i18n="player_placeholder">Select a route to load the {{ACTIVITY_NOUN_SINGULAR}} video.</p>
             </div>
           </div>
 
           <aside class="route-detail">
-            <p class="eyebrow">Now selected</p>
-            <h3 id="selectedTitle">No route selected</h3>
-            <p id="selectedDescription">
+            <p class="eyebrow" data-i18n="selected_eyebrow">Now selected</p>
+            <h3 id="selectedTitle" data-i18n="selected_title_empty">No route selected</h3>
+            <p id="selectedDescription" data-i18n="selected_description_default">
               Choose a scenic {{ACTIVITY_NOUN_SINGULAR}} card above. The player supports YouTube embeds,
               fullscreen mode, and source links for browser fallback.
             </p>
             <dl class="metadata-list" id="selectedMetadata"></dl>
             <div class="{{ACTIVITY_NOUN_SINGULAR}}-actions">
-              <button id="startRideButton" class="primary-button" type="button" disabled>Start {{ACTIVITY_NOUN_SINGULAR}}</button>
-              <button id="favoriteRouteButton" class="secondary-button" type="button" disabled>Save favorite</button>
-              <a id="sourceLink" class="secondary-button disabled-link" href="#" target="_blank" rel="noopener">Open source</a>
+              <button id="startRideButton" class="primary-button" type="button" disabled data-i18n="start_button">Start {{ACTIVITY_NOUN_SINGULAR}}</button>
+              <button id="favoriteRouteButton" class="secondary-button" type="button" disabled data-i18n="favorite_button_save">Save favorite ☆</button>
+              <a id="sourceLink" class="secondary-button disabled-link" href="#" target="_blank" rel="noopener" data-i18n="source_link_text">Open source</a>
             </div>
           </aside>
         </article>
@@ -180,26 +187,26 @@
 
       <section id="localData" class="local-panel" aria-labelledby="localTitle">
         <div>
-          <p class="eyebrow">Saved on this device</p>
-          <h2 id="localTitle">Your {{ACTIVITY_NOUN}}</h2>
+          <p class="eyebrow" data-i18n="local_eyebrow">Saved on this device</p>
+          <h2 id="localTitle" data-i18n="local_title">Your {{ACTIVITY_NOUN}}</h2>
         </div>
         <div class="local-summary">
-          <strong id="favoriteCount">0 favorites</strong>
-          <span>Favorites, recent {{ACTIVITY_NOUN}}, and filter preferences stay local to this browser.</span>
+          <strong id="favoriteCount" data-i18n="favorite_count_other" data-i18n-vars='{"count":"0"}'>0 favorites</strong>
+          <span data-i18n="local_summary">Favorites, recent {{ACTIVITY_NOUN}}, and filter preferences stay local to this browser.</span>
         </div>
         <div>
-          <p class="local-label">Recent routes</p>
+          <p class="local-label" data-i18n="recent_label">Recent routes</p>
           <div id="recentRoutes" class="recent-routes" aria-live="polite"></div>
         </div>
         <div class="local-actions" aria-label="App actions">
-          <button id="installButton" class="secondary-button compact-button" type="button" hidden>Install app</button>
-          <button id="exportDataButton" class="secondary-button compact-button" type="button">Export data</button>
-          <button id="copyDataButton" class="secondary-button compact-button" type="button">Copy backup JSON</button>
+          <button id="installButton" class="secondary-button compact-button" type="button" hidden data-i18n="install_button">Install app</button>
+          <button id="exportDataButton" class="secondary-button compact-button" type="button" data-i18n="export_button">Export data</button>
+          <button id="copyDataButton" class="secondary-button compact-button" type="button" data-i18n="copy_backup_button">Copy backup JSON</button>
           <label class="import-data-control secondary-button compact-button">
-            <span>Import data</span>
+            <span data-i18n="import_button">Import data</span>
             <input id="importDataInput" type="file" accept="application/json,.json">
           </label>
-          <button id="resetDataButton" class="secondary-button compact-button danger-button" type="button">Reset local data</button>
+          <button id="resetDataButton" class="secondary-button compact-button danger-button" type="button" data-i18n="reset_button">Reset local data</button>
           <span id="appStatus" class="local-empty" role="status" aria-live="polite"></span>
           <textarea id="backupJsonOutput" class="backup-json-output" readonly hidden aria-label="{{SITE_NAME}} backup JSON"></textarea>
         </div>
@@ -209,32 +216,32 @@
     <footer class="site-footer" aria-labelledby="footerTitle">
       <div class="footer-card">
         <div class="footer-heading">
-          <p class="eyebrow">Local-first by design</p>
-          <h2 id="footerTitle">{{SITE_NAME}} keeps the {{ACTIVITY_NOUN_SINGULAR}} simple.</h2>
+          <p class="eyebrow" data-i18n="footer_eyebrow">Local-first by design</p>
+          <h2 id="footerTitle" data-i18n="footer_title">{{SITE_NAME}} keeps the {{ACTIVITY_NOUN_SINGULAR}} simple.</h2>
         </div>
         <div class="footer-copy">
-          <p>
+          <p data-i18n-html="footer_copy_1">
             Made by <a href="https://www.hanselman.com/" target="_blank" rel="noopener">Scott Hanselman</a>.
             There is no backend database, account system, or social login.
           </p>
-          <p>
+          <p data-i18n-html="footer_copy_2">
             Favorites, recent {{ACTIVITY_NOUN}}, and preferences stay in this browser on this device. Use
             <strong>Export data</strong> or <strong>Import data</strong> to move a local backup between
             browsers, and <strong>Reset local data</strong> whenever you want a fresh start.
           </p>
-          <p>
+          <p data-i18n-html="footer_copy_3">
             {{SITE_NAME}} is an installable PWA for an app-like fullscreen {{ACTIVITY_NOUN_SINGULAR}} experience. Videos remain
             hosted by their original creators and platforms; {{SITE_NAME}} only links or embeds them.
           </p>
-          <p>
+          <p data-i18n-html="footer_copy_4">
             Prefer {{SISTER_SITE_ACTIVITY}}?
             <a href="{{SISTER_SITE_URL}}" target="_blank" rel="noopener">{{SISTER_SITE_NAME}}</a>
             is the same app, tuned for your treadmill or your bike.
           </p>
         </div>
         <div class="footer-links" aria-label="Footer links">
-          <a href="{{SISTER_SITE_URL}}" class="sister-link" target="_blank" rel="noopener">Try {{SISTER_SITE_NAME}} →</a>
-          <a href="https://github.com/shanselman/ScenicSpin" target="_blank" rel="noopener">View source on GitHub</a>
+          <a href="{{SISTER_SITE_URL}}" class="sister-link" target="_blank" rel="noopener" data-i18n="footer_sister_link">Try {{SISTER_SITE_NAME}} →</a>
+          <a href="https://github.com/shanselman/ScenicSpin" target="_blank" rel="noopener" data-i18n="footer_github_link">View source on GitHub</a>
         </div>
       </div>
     </footer>
