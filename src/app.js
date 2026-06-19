@@ -1313,6 +1313,29 @@ function selectRoute(routeId, moveToPlayer = false, options = {}) {
   }
 }
 
+function exitPwaFullscreen() {
+  elements.playerShell.classList.remove('pwa-fullscreen');
+  removePwaFullscreenCloseButton();
+  updateFullscreenButton();
+}
+
+function createPwaFullscreenCloseButton() {
+  let btn = document.querySelector('#pwaFullscreenClose');
+  if (btn) return;
+  btn = document.createElement('button');
+  btn.id = 'pwaFullscreenClose';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Exit fullscreen');
+  btn.textContent = '\u2715';
+  btn.addEventListener('click', exitPwaFullscreen);
+  elements.playerShell.appendChild(btn);
+}
+
+function removePwaFullscreenCloseButton() {
+  const btn = document.querySelector('#pwaFullscreenClose');
+  if (btn) btn.remove();
+}
+
 async function requestFullscreen() {
   const target = elements.playerShell;
 
@@ -1326,8 +1349,7 @@ async function requestFullscreen() {
   }
 
   if (target.classList.contains('pwa-fullscreen')) {
-    target.classList.remove('pwa-fullscreen');
-    updateFullscreenButton();
+    exitPwaFullscreen();
     return;
   }
 
@@ -1338,6 +1360,7 @@ async function requestFullscreen() {
   } else {
     // iOS PWA fallback — fake fullscreen via CSS
     target.classList.add('pwa-fullscreen');
+    createPwaFullscreenCloseButton();
     updateFullscreenButton();
   }
 }
@@ -1434,7 +1457,6 @@ async function installApp() {
 function startHeroRoute() {
   if (!state.featuredRoute) return;
   selectRoute(state.featuredRoute.id, true);
-  startRide();
 }
 
 function bindEvents() {
