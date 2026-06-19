@@ -159,6 +159,7 @@ h3 {
 }
 
 .ride-now,
+.walk-now,
 .controls-panel,
 .local-panel,
 .route-card,
@@ -173,7 +174,8 @@ h3 {
   backdrop-filter: blur(18px);
 }
 
-.ride-now {
+.ride-now,
+.walk-now {
   display: grid;
   align-content: end;
   gap: 0.75rem;
@@ -184,7 +186,8 @@ h3 {
   background: rgba(13, 34, 41, 0.82);
 }
 
-.ride-now p {
+.ride-now p,
+.walk-now p {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
@@ -204,7 +207,8 @@ h3 {
   box-shadow: 0 0 20px var(--accent);
 }
 
-.ride-now strong {
+.ride-now strong,
+.walk-now strong {
   display: block;
   position: relative;
   z-index: 1;
