@@ -1314,6 +1314,8 @@ function selectRoute(routeId, moveToPlayer = false, options = {}) {
 }
 
 async function requestFullscreen() {
+  const target = elements.playerShell;
+
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) {
       await document.exitFullscreen();
@@ -1323,16 +1325,29 @@ async function requestFullscreen() {
     return;
   }
 
-  const target = elements.playerShell;
+  if (target.classList.contains('pwa-fullscreen')) {
+    target.classList.remove('pwa-fullscreen');
+    updateFullscreenButton();
+    return;
+  }
+
   if (target.requestFullscreen) {
     await target.requestFullscreen();
   } else if (target.webkitRequestFullscreen) {
     target.webkitRequestFullscreen();
+  } else {
+    // iOS PWA fallback — fake fullscreen via CSS
+    target.classList.add('pwa-fullscreen');
+    updateFullscreenButton();
   }
 }
 
 function updateFullscreenButton() {
-  const isFullscreen = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+  const isFullscreen = Boolean(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    elements.playerShell.classList.contains('pwa-fullscreen')
+  );
   elements.fullscreenButton.textContent = isFullscreen ? 'Exit fullscreen' : 'Fullscreen';
   elements.fullscreenButton.setAttribute('aria-pressed', isFullscreen ? 'true' : 'false');
 }

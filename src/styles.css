@@ -1278,3 +1278,13 @@ a:focus-visible {
     font-size: 1.1rem;
   }
 }
+
+/* iOS PWA fake-fullscreen fallback */
+.pwa-fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  z-index: 9999;
+  border-radius: 0;
+}
