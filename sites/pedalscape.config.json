@@ -23,6 +23,8 @@
   "catalogFile": "catalog.json",
   "activityNoun": "rides",
   "activityNounCap": "Rides",
+  "activityNounSingular": "ride",
+  "activityNounSingularCap": "Ride",
   "activityVerb": "cycling",
   "activityVerbCap": "Cycling",
   "iconsFolder": "icons/pedalscape",

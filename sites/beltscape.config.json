@@ -23,6 +23,8 @@
   "catalogFile": "beltscape-catalog.json",
   "activityNoun": "walks",
   "activityNounCap": "Walks",
+  "activityNounSingular": "walk",
+  "activityNounSingularCap": "Walk",
   "activityVerb": "walking",
   "activityVerbCap": "Walking",
   "iconsFolder": "icons/beltscape",

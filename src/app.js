@@ -647,7 +647,7 @@ function normalizeRoute(route) {
   const videoId = youtubeRoute ? extractYouTubeId(route) : null;
   const thumbnailUrl = route.thumbnailUrl || route.imageUrl || getYouTubeThumbnail(videoId, 'hqdefault');
   const thumbnailFallbackUrl = youtubeRoute && videoId ? getYouTubeThumbnail(videoId, 'mqdefault') : '';
-  const title = cleanPublicText(route.title, 'Untitled ride');
+  const title = cleanPublicText(route.title, 'Untitled {{ACTIVITY_NOUN_SINGULAR}}');
   const location = cleanPublicText(route.location, 'Location to be announced');
   const terrain = cleanPublicText(route.terrain, 'Scenic cycling route');
   const creator = cleanPublicText(route.creator, 'Public video source');
@@ -876,7 +876,7 @@ function renderLocalPanel() {
     .filter(Boolean);
 
   if (recentRoutes.length === 0) {
-    elements.recentRoutes.innerHTML = '<span class="local-empty">Select or start a ride to build recent routes.</span>';
+    elements.recentRoutes.innerHTML = '<span class="local-empty">Select or start a {{ACTIVITY_NOUN_SINGULAR}} to build recent routes.</span>';
     return;
   }
 
@@ -904,7 +904,7 @@ function setHeroImage(route) {
   const fallback = elements.heroImageFallback;
   image.hidden = !route.thumbnailUrl;
   fallback.hidden = Boolean(route.thumbnailUrl);
-  fallback.textContent = route.scenery || 'Ride';
+  fallback.textContent = route.scenery || '{{ACTIVITY_NOUN_SINGULAR_CAP}}';
 
   if (!route.thumbnailUrl) {
     image.removeAttribute('src');
@@ -922,24 +922,24 @@ function renderHeroRoute() {
   const route = state.featuredRoute;
 
   if (!route) {
-    elements.heroLabel.innerHTML = '<span class="status-dot" aria-hidden="true"></span> Loading catalog ride';
+    elements.heroLabel.innerHTML = '<span class="status-dot" aria-hidden="true"></span> Loading catalog {{ACTIVITY_NOUN_SINGULAR}}';
     elements.heroSelection.textContent = 'Choose a route below';
     elements.heroMetadata.textContent = '';
     elements.heroRouteButton.disabled = true;
-    elements.heroRouteButton.textContent = 'Start this ride';
+    elements.heroRouteButton.textContent = 'Start this {{ACTIVITY_NOUN_SINGULAR}}';
     elements.heroRouteButton.removeAttribute('aria-label');
     elements.heroImage.hidden = true;
     elements.heroImageFallback.hidden = false;
-    elements.heroImageFallback.textContent = 'Ride';
+    elements.heroImageFallback.textContent = '{{ACTIVITY_NOUN_SINGULAR_CAP}}';
     return;
   }
 
   const isContinue = state.heroMode === 'continue';
-  elements.heroLabel.innerHTML = `<span class="status-dot" aria-hidden="true"></span> ${isContinue ? 'Continue ride' : 'Recommended first ride'}`;
+  elements.heroLabel.innerHTML = `<span class="status-dot" aria-hidden="true"></span> ${isContinue ? 'Continue {{ACTIVITY_NOUN_SINGULAR}}' : 'Recommended first {{ACTIVITY_NOUN_SINGULAR}}'}`;
   elements.heroSelection.textContent = route.title;
   elements.heroMetadata.textContent = `${route.location} · ${route.durationLabel} · ${route.intensity} · from routes/catalog.json`;
   elements.heroRouteButton.disabled = false;
-  elements.heroRouteButton.textContent = isContinue ? 'Continue this ride' : 'Start recommended ride';
+  elements.heroRouteButton.textContent = isContinue ? 'Continue this {{ACTIVITY_NOUN_SINGULAR}}' : 'Start recommended {{ACTIVITY_NOUN_SINGULAR}}';
   elements.heroRouteButton.setAttribute('aria-label', `${elements.heroRouteButton.textContent}: ${route.title}`);
   setHeroImage(route);
 }
@@ -987,13 +987,13 @@ function renderCatalog() {
   }
 
   if (routes.length === 0) {
-    elements.resultCount.textContent = '0 rides';
+    elements.resultCount.textContent = '0 {{ACTIVITY_NOUN}}';
     renderStatus('No routes are available yet.', 'Add entries to routes/catalog.json to populate the catalog.');
     return;
   }
 
   const visibleRoutes = routes.filter(routeMatches);
-  elements.resultCount.textContent = `${visibleRoutes.length} ride${visibleRoutes.length === 1 ? '' : 's'}`;
+  elements.resultCount.textContent = `${visibleRoutes.length} {{ACTIVITY_NOUN_SINGULAR}}${visibleRoutes.length === 1 ? '' : 's'}`;
 
   if (visibleRoutes.length === 0) {
     renderStatus('No routes match these filters.', 'Try a different duration, scenery, intensity, or search term.');
@@ -1029,7 +1029,7 @@ function renderCatalog() {
         <p class="route-location">${escapeHtml(route.location)}</p>
         <h3>${escapeHtml(route.title)}</h3>
         <ul class="pill-list route-metadata-badges" aria-label="Route decision metadata">${metadataBadges}</ul>
-        <span class="card-cta" aria-hidden="true">Preview ride →</span>
+        <span class="card-cta" aria-hidden="true">Preview {{ACTIVITY_NOUN_SINGULAR}} →</span>
       </div>
     `;
 
@@ -1199,7 +1199,7 @@ function renderCandidates() {
   }
 }
 
-function clearSelectedRoute(message = 'Choose a scenic ride card above. The player supports YouTube embeds, fullscreen mode, and source links for browser fallback.') {
+function clearSelectedRoute(message = 'Choose a scenic {{ACTIVITY_NOUN_SINGULAR}} card above. The player supports YouTube embeds, fullscreen mode, and source links for browser fallback.') {
   state.selectedRoute = null;
   elements.selectedTitle.textContent = 'No route selected';
   elements.selectedDescription.textContent = message;
@@ -1214,7 +1214,7 @@ function clearSelectedRoute(message = 'Choose a scenic ride card above. The play
   elements.playerShell.innerHTML = `
     <div class="player-placeholder">
       <span aria-hidden="true">▶</span>
-      <p>Select a route to load the ride video.</p>
+      <p>Select a route to load the {{ACTIVITY_NOUN_SINGULAR}} video.</p>
     </div>
   `;
 }
@@ -1278,7 +1278,7 @@ function loadPlayer(route, autoplay = false) {
 
   if (route.sourceType === 'youtube' && route.videoId) {
     const iframe = document.createElement('iframe');
-    iframe.title = `${route.title} ride video`;
+    iframe.title = `${route.title} {{ACTIVITY_NOUN_SINGULAR}} video`;
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.allowFullscreen = true;
     iframe.src = buildEmbedUrl(route, autoplay);
